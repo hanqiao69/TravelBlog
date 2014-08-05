@@ -1,0 +1,7 @@
+.container2 {
+ 	margin-top:70px;
+}
+
+svg:not(:root) {
+  overflow: visible;
+}
