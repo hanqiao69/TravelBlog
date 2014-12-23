@@ -1,0 +1,59 @@
+{%extends 'base.html' %}
+{% load static %}
+{% load account %}
+{% block optscript %}  <link href = "{%static "css/style.css"%}" rel ="stylesheet">{% endblock %}
+{%block content %}
+My name is {{user}}
+<img src={{profile_image}}></img>
+<table cellpadding="0" cellspacing="0" id="our_table">
+  <tr>
+    <td><input id="1" type="hidden" value="false">a</input></td>
+    <td><input id="2" type="hidden" value="false">b</input></td>
+    <td><input id="3" type="hidden" value="false">c</input></td>
+  </tr>
+  <tr>
+    <td><input id="4" type="hidden" value="false">d</input></td>
+    <td><input id="5" type="hidden" value="false">e</input></td>
+    <td><input id="6" type="hidden" value="false">f</input></td>
+  </tr>
+  <tr>
+    <td><input id="7" type="hidden" value="false">g</input></td>
+    <td><input id="8" type="hidden" value="false">h</input></td>
+    <td><input id="9" type="hidden" value="false">i</input></td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+$(function () {
+  var isMouseDown = false,
+    isHighlighted;
+  $("#our_table td")
+    .mousedown(function () {
+      isMouseDown = true;
+      $(this).toggleClass("highlighted");
+      $(this).find("input").each(function() {
+        curr = $(this).val()
+        $(this).val(curr === "true" ? "false" : "true");
+      });
+      isHighlighted = $(this).hasClass("highlighted");
+      return false; // prevent text selection
+    })
+    .mouseover(function () {
+      if (isMouseDown) {
+        $(this).toggleClass("highlighted", isHighlighted);
+        $(this).find("input").each(function() {
+          $(this).val(isHighlighted);
+        });
+      }
+    })
+    .bind("selectstart", function () {
+      return false;
+    })
+
+  $(document)
+    .mouseup(function () {
+      isMouseDown = false;
+    });
+});
+    </script>
+    {%endblock%}

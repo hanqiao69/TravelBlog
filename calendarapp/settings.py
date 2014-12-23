@@ -47,8 +47,10 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
     )
-
+ROOT_URLCONF = 'calendarapp.urls'
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
@@ -64,12 +66,18 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-
-ROOT_URLCONF = 'calendarapp.urls'
+SOCIALACCOUNT_PROVIDERS = { 'google':
+        { 'SCOPE': ['https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/calendar'],
+          'AUTH_PARAMS': { 'access_type': 'offline' } },
+          'facebook': {
+        'SCOPE': ['email', 'publish_stream'],
+        'METHOD': 'js_sdk'  # instead of 'oauth2'
+    }}
 
 WSGI_APPLICATION = 'calendarapp.wsgi.application'
 LOGIN_REDIRECT_URL = "/"
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 

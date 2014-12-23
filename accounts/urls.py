@@ -7,12 +7,14 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'transcription.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-
-	url(r'^home/$', home),
-	url(r'^$', home),
 	#url(r'^login/', login),
 	# url(r'^logout/', logout),
 	# url(r'^signup/',signup),
 	# url(r'^legal/', legal),
 	# url(r'^administration/',administration)),
+	url(r'^home/$', home),
+	url(r'^$', home),
+	url(r'^profile/(?P<user_id>[0-9]+)/$', profile),
+	url(r'^profile/me/$', profileself),
+	url(r'^profile/update/$', calupdate),
 )
