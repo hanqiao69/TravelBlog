@@ -5,24 +5,27 @@
 {%block content %}
 My name is {{user}}
 <img src={{profile_image}}></img>
+<form action="#" method="post">
+  {% csrf_token %}
 <table cellpadding="0" cellspacing="0" id="our_table">
   <tr>
-    <td><input id="1" type="hidden" value="false">a</input></td>
-    <td><input id="2" type="hidden" value="false">b</input></td>
-    <td><input id="3" type="hidden" value="false">c</input></td>
+    <td><input name="1" type="hidden" value="false">a</input></td>
+    <td><input name="2" type="hidden" value="false">b</input></td>
+    <td><input name="3" type="hidden" value="false">c</input></td>
   </tr>
   <tr>
-    <td><input id="4" type="hidden" value="false">d</input></td>
-    <td><input id="5" type="hidden" value="false">e</input></td>
-    <td><input id="6" type="hidden" value="false">f</input></td>
+    <td><input name="4" type="hidden" value="false">d</input></td>
+    <td><input name="5" type="hidden" value="false">e</input></td>
+    <td><input name="6" type="hidden" value="false">f</input></td>
   </tr>
   <tr>
-    <td><input id="7" type="hidden" value="false">g</input></td>
-    <td><input id="8" type="hidden" value="false">h</input></td>
-    <td><input id="9" type="hidden" value="false">i</input></td>
+    <td><input name="7" type="hidden" value="false">g</input></td>
+    <td><input name="8" type="hidden" value="false">h</input></td>
+    <td><input name="9" type="hidden" value="false">i</input></td>
   </tr>
 </table>
-
+ <input type="submit" class="btn" value="Click" name="mybtn">
+</form>
 <script type="text/javascript">
 $(function () {
   var isMouseDown = false,

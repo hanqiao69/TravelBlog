@@ -39,6 +39,15 @@ def profileself(request):
     return render_to_response('profile.html', data, RequestContext(request))
 @login_required(login_url='/login')
 def calupdate(request):
+    if(request.POST.get('mybtn')):
+        string1 = ""
+        for i in range(1,10):
+            print request.POST.get(str(i))
+            if request.POST.get(str(i)) =='true':
+                string1 += "1"
+            else:
+                string1 +="0"
+        compileResults(string1)
     print(request)
     userr = User.objects.get(username=request.user)
     print userr
@@ -48,3 +57,5 @@ def calupdate(request):
     data = {'profile_image': user_profile.profile_image_url(), 'profile': user_profile}
                 
     return render_to_response('calupdate.html', data, RequestContext(request))
+def compileResults(string1):
+	print string1
