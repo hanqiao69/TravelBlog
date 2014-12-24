@@ -1,0 +1,12 @@
+{%extends 'base.html' %}
+{%block content %}
+{% load cal_extras %}
+<div style="margin:50px"></div>
+    {% for member in members %}
+    {{member.username}}
+<img src={{member.profile_image}} height="40px" width="40px"></img>
+  {%endfor%}
+
+</table>
+ <div style="margin:50px"></div>
+{%endblock%}

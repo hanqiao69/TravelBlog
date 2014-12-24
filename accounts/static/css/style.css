@@ -5,15 +5,29 @@
 svg:not(:root) {
   overflow: visible;
 }
+table{
+    border-collapse: collapse;
+}
 table td {
-  width:100px;
-  height:100px;
+  width:50px;
+  height:20px;
   text-align:center;
   vertical-align:middle;
   background-color:#ccc;
-  border:1px solid #fff;
+  border:1px solid #000;
 }
 
 table td.highlighted {
-  background-color:#999;
+  background-color:green;
+}
+table td.blank{
+	background-color:white !important;
+	border:white;
+}
+
+table td.even{
+	border-bottom: 2px dotted #000 !important;
+}
+table td.odd{
+	border-bottom: 2px solid #000 !important; 
 }

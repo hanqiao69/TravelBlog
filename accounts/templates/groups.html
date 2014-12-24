@@ -1,0 +1,13 @@
+{%extends 'base.html' %}
+{%block content %}
+{% load cal_extras %}
+User: {{username.username}}
+<img src={{profile_image}} height="40px" width="40px"></img>
+<div style="margin:50px"></div>
+    {% for group in groups %}
+    <a href = "/group/{{group.id}}">{{group.id}}</a><br/>
+  {%endfor%}
+
+</table>
+ <div style="margin:50px"></div>
+{%endblock%}
