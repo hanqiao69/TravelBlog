@@ -47,8 +47,7 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.instagram',
     )
 ROOT_URLCONF = 'calendarapp.urls'
 AUTHENTICATION_BACKENDS = (
@@ -66,13 +65,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-SOCIALACCOUNT_PROVIDERS = { 'google':
-        { 'SCOPE': ['https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/calendar'],
-          'AUTH_PARAMS': { 'access_type': 'offline' } },
-          'facebook': {
-        'SCOPE': ['email', 'publish_stream'],
-        'METHOD': 'js_sdk'  # instead of 'oauth2'
+SOCIALACCOUNT_PROVIDERS = { 'instagram':
+        { 'SCOPE': ['basic']
     }}
 
 WSGI_APPLICATION = 'calendarapp.wsgi.application'
@@ -100,10 +94,13 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
-
+ADAPTER = 'accounts.adapter.CorporateAdapter'
+ACCOUNT_ADAPTER = 'accounts.adapter.CorporateAdapter'
+AUTH_USER_MODEL = 'accounts.CustomUser'
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
-
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm'
+SOCIALACCOUNT_AUTO_SIGNUP=True
+ACCOUNT_EMAIL_REQUIRED=False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
@@ -112,9 +109,19 @@ from os import path
 
 PROJECT_ROOT = path.dirname(path.abspath(path.dirname(__file__)))
 
-STATIC_ROOT = path.join(PROJECT_ROOT, 'static').replace('\\','/')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
- 
-
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+ 
 LOGIN_REDIRECT_URL = '/'
+import django
+django.setup()
+
+from django.contrib import admin
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+admin.site.register(User)

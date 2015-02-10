@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from views import *
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -20,4 +22,6 @@ urlpatterns = patterns('',
 	url(r'^profile/me/groups$', groups),
 	url(r'^group/(?P<group_id>[0-9]+)/$', group),
 	url(r'^profile/update/$', calupdate),
+	url(r'^brand/$', brand),
 )
+urlpatterns += staticfiles_urlpatterns()

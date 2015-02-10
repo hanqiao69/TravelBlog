@@ -1,0 +1,9 @@
+body,input,textarea,select {
+  line-height: 1.5em;
+  font-size: 14pt;
+}
+
+#header-wrapper {
+  padding: 2em 0 4em 0;
+}
+

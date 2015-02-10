@@ -9,26 +9,6 @@ My name is {{user}}
 <div style="margin:50px"></div>
 <form action="#" method="post">
   {% csrf_token %}
-<table cellpadding="0" cellspacing="0" id="our_table">
-  <tr>
-    {% for k in 8|get_range %}
-    <td class = "blank">{{k|day}}</td>
-    {% endfor%}
-  </tr>
-  {% for i in 48|get_range %}
-  <tr>
-    {%if i|even%}
-    <td class = "blank"><div style="margin-top:-15px; margin-right:10px; text-align:right">{{i|divideby:2|totime}}</div></td>
-    {%else%}
-    <td class = "blank"><div style="margin-top:-15px"></div></td>
-    {%endif%}
-    {% for j in 7|get_range %}
-    <td class = "{{i|evenstring}} {{i|num:j|highlight:base_cal}}"><input name="{{i|num:j}}" type="hidden" value="{{i|num:j|truefalse:base_cal}}"></input></td>
-    {%endfor%}
-  </tr>
-  {%endfor%}
-
-</table>
 <div style="margin:50px"></div>
  <input type="submit" class="btn" value="Update Base Calendar" name="mybtn">
  <div style="margin:50px"></div>
