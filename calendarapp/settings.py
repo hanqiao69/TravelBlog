@@ -26,13 +26,14 @@ TEMPLATE_DEBUG = True
 TEMPLATE_DIRS = ('templates', 'accounts/templates')
 ALLOWED_HOSTS = []
 SITE_ID = 1
+
 # Application definition
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "allauth.account.context_processors.account",
     "django.contrib.auth.context_processors.auth",
     "allauth.socialaccount.context_processors.socialaccount",
-    )
+)
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -48,7 +49,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.instagram',
-    )
+)
 ROOT_URLCONF = 'calendarapp.urls'
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -65,16 +66,16 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-SOCIALACCOUNT_PROVIDERS = { 'instagram':
-        { 'SCOPE': ['basic']
-    }}
+SOCIALACCOUNT_PROVIDERS = {
+    'instagram': {'SCOPE': ['basic']}
+}
 
 WSGI_APPLICATION = 'calendarapp.wsgi.application'
 LOGIN_REDIRECT_URL = "/"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -84,7 +85,7 @@ DATABASES = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
-#comment
+# comment
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -99,8 +100,8 @@ ACCOUNT_ADAPTER = 'accounts.adapter.CorporateAdapter'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm'
-SOCIALACCOUNT_AUTO_SIGNUP=True
-ACCOUNT_EMAIL_REQUIRED=False
+SOCIALACCOUNT_AUTO_SIGNUP = True
+ACCOUNT_EMAIL_REQUIRED = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
@@ -115,7 +116,7 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
- 
+
 LOGIN_REDIRECT_URL = '/'
 import django
 django.setup()

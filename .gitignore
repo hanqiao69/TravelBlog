@@ -1,2 +1,5 @@
 *.pyc
 uploads/*
+venv
+db.sqlite3
+static/user_images
