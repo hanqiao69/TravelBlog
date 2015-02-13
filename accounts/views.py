@@ -41,6 +41,7 @@ def brand(request):
     return render_to_response("brand.html", RequestContext(request))
 
 
+@login_required(login_url='/login')
 def groups(request):
     user = CustomUser.objects.get(username=request.user)
     user_profile = user.get_user_profile()
