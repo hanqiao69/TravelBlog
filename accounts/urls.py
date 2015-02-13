@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from views import home, profile, publicprofile, profileself, \
-    groups, group, calupdate, brand
+    groups, group, calupdate, brand, update_image
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -23,7 +23,8 @@ urlpatterns = patterns(
     url(r'^profile/me/$', profileself),
     url(r'^profile/me/groups$', groups),
     url(r'^group/(?P<group_id>[0-9]+)/$', group),
-    url(r'^profile/update/$', calupdate),
+    url(r'^profile/update/$', calupdate, name='calupdate'),
+    url(r'^profile/update/image$', update_image, name='update_image'),
     url(r'^brand/$', brand),
 )
 urlpatterns += staticfiles_urlpatterns()
