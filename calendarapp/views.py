@@ -3,7 +3,7 @@
 # 	#fill in here
 # 	render_to_response("index.html", RequestContext(request))
 
-# def logout(request): 
+# def logout(request):
 # 	#fill in here
 # 	render_to_response("index.html", RequestContext(request))
 
@@ -22,4 +22,3 @@
 # def administration(request):
 # 	#fill in here
 # 	render_to_response("index.html", RequestContext(request))
-
