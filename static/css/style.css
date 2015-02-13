@@ -177,6 +177,9 @@ header > p {
   margin-top:40px;
   padding-bottom:40px;
 }
+.top-padding {
+  padding-top:40px;
+}
 #header-wrapper {
   padding: 1em 0 3em 0;
   background-color: #53afd7;
@@ -255,4 +258,17 @@ header > p {
   letter-spacing: 1px;
   border: none;
   text-transform: uppercase;
+  margin-top:2px;
+}
+
+#logo a:hover {
+  color: #fff;
+  display: block;
+  font-weight: 300;
+  font-size: 1em;
+  letter-spacing: 1px;
+  border: none;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top:2px;
 }

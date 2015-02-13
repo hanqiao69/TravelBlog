@@ -30,37 +30,4 @@ My name is {{user}}
   {% csrf_token %}
    <input type="submit" class="btn" value="Generate Group" name="gen_group">
  </form>
-<script type="text/javascript">
-$(function () {
-  var isMouseDown = false,
-    isHighlighted;
-  $("#our_table td")
-    .mousedown(function () {
-      isMouseDown = true;
-      $(this).toggleClass("highlighted");
-      $(this).find("input").each(function() {
-        curr = $(this).val()
-        $(this).val(curr === "true" ? "false" : "true");
-      });
-      isHighlighted = $(this).hasClass("highlighted");
-      return false; // prevent text selection
-    })
-    .mouseover(function () {
-      if (isMouseDown) {
-        $(this).toggleClass("highlighted", isHighlighted);
-        $(this).find("input").each(function() {
-          $(this).val(isHighlighted);
-        });
-      }
-    })
-    .bind("selectstart", function () {
-      return false;
-    })
-
-  $(document)
-    .mouseup(function () {
-      isMouseDown = false;
-    });
-});
-    </script>
     {%endblock%}

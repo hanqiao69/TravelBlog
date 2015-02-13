@@ -1,5 +1,5 @@
 """
-Django settings for calendarapp project.
+Django settings for brandplug project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -50,7 +50,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'allauth.socialaccount.providers.instagram',
 )
-ROOT_URLCONF = 'calendarapp.urls'
+ROOT_URLCONF = 'brandplug.urls'
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
@@ -70,7 +70,7 @@ SOCIALACCOUNT_PROVIDERS = {
     'instagram': {'SCOPE': ['basic']}
 }
 
-WSGI_APPLICATION = 'calendarapp.wsgi.application'
+WSGI_APPLICATION = 'brandplug.wsgi.application'
 LOGIN_REDIRECT_URL = "/"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

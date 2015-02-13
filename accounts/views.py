@@ -45,7 +45,7 @@ def brand(request):
 
 
 @login_required(login_url='/login')
-def groups(request):
+def campaigns(request):
     user = CustomUser.objects.get(username=request.user)
     user_profile = user.get_user_profile()
     groups = Group.objects.all().filter(admin=request.user)

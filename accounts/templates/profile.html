@@ -1,28 +1,10 @@
 {%extends 'base.html' %}
+{% load static %}
 {%block content %}
 {% load cal_extras %}
 User: {{username.username}}
-<img src={{profile_image}} height="40px" width="40px"></img>
-<div style="margin:50px"></div>
-<table cellpadding="0" cellspacing="0" id="our_table">
-  <tr>
-    {% for k in 8|get_range %}
-    <td class = "blank">{{k|day}}</td>
-    {% endfor%}
-  </tr>
-  {% for i in 48|get_range %}
-  <tr>
-    {%if i|even%}
-    <td class = "blank"><div style="margin-top:-15px; margin-right:10px; text-align:right">{{i|divideby:2|totime}}</div></td>
-    {%else%}
-    <td class = "blank"><div style="margin-top:-15px"></div></td>
-    {%endif%}
-    {% for j in 7|get_range %}
-    <td class = "{{i|evenstring}} {{i|num:j|highlight:base_cal}}"><input name="{{i|num:j}}" type="hidden" value="{{i|num:j|truefalse:base_cal}}"></input></td>
-    {%endfor%}
-  </tr>
-  {%endfor%}
 
-</table>
+<img src={% static profile_image %} height="40px" width="40px"></img>
+<div style="margin:50px"></div>
  <div style="margin:50px"></div>
 {%endblock%}
