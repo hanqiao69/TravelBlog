@@ -2,9 +2,42 @@
 {% load static %}
 {%block content %}
 {% load cal_extras %}
-User: {{username.username}}
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-<img src={% static profile_image %} height="40px" width="40px"></img>
+<div class="row panel">
+        <div class="col-md-3  col-xs-3">
+           <img src={% static profile_image %} class="img-thumbnail picture hidden-xs"/>
+        </div>
+        <div class="col-md-8  col-xs-8 hidden-xs">
+           <div class="header">
+                <h1>{{username.username}}</h1>
+                <h4>{{prof.provider}}</h4>
+                <span></span>
+           </div>
+        </div>
+  <div>
+    <div class ="row" style="padding-top:40px;">
+      <img src={% static profile_image %} class="img-thumbnail visible-xs picture_mob" />
+    </div>
+    <div class = "row">
+        <div class="col-md-12  col-xs-12 visible-xs">
+           <div class="header" style="text-align:center">
+                <h1>{{username.username}}</h1>
+                <h4>{{prof.provider}}</h4>
+                <span></span>
+           </div>
+        </div>
+    </div>
+  <div class="row nav">    
+        <div class="col-md-11 col-xs-11" style="margin: 20px;padding: 20px;">
+            <div class="col-md-4 col-xs-4 well"><i class="fa fa-instagram fa-lg"></i>{{prof.posts}}</div>
+            <div class="col-md-4 col-xs-4 well"><i class="fa fa-users fa-lg"></i> {{prof.followers}}</div>
+            <div class="col-md-4 col-xs-4 well"><i class="fa fa-instagram fa-lg"></i> 26</div>
+        </div>
+    </div>
+</div>
+
 <div style="margin:50px"></div>
  <div style="margin:50px"></div>
 {%endblock%}

@@ -36,6 +36,7 @@ class UserProfile(models.Model):
 class InfluencerProfile(UserProfile):
     username = models.CharField(max_length=500)
     profile_image = models.TextField(null=True, blank=True)
+    provider = models.TextField(verbose_name='provider',null=True, blank=True)
     fullname = models.TextField(null=True, blank=True)
     counts = models.TextField(null=True, blank=True)
     posts = models.IntegerField(null=True, blank=True)
@@ -68,7 +69,6 @@ class InfluencerProfile(UserProfile):
 
     def __unicode__(self):
         return self.username
-
 
 class CorporateProfile(UserProfile):
     company = models.TextField(null=True, blank=True)
@@ -146,6 +146,7 @@ def prepopulate_profile(sender, instance, created, **kwargs):
         user_profile.followers = ucounts.get('followed_by')
         user_profile.numfollow = ucounts.get('follows')
         user_profile.instagramid = extra.get('id')
+        user_profile.provider = social_account.provider
         user_profile.save()
 post_save.connect(prepopulate_profile, sender=SocialAccount)
 

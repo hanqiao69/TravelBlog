@@ -272,3 +272,19 @@ header > p {
   text-decoration: none;
   margin-top:2px;
 }
+.picture{
+    height:150px;
+    width:150px;
+    top: 75px;
+    left:-75px;
+    margin-top:10px;
+}
+
+.picture_mob{
+    width: 35%;
+    margin-top:20px;
+    bottom: 70%;
+    float:center;
+    margin-left: auto;
+    margin-right: auto 
+}
