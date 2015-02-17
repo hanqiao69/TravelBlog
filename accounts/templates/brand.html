@@ -1,5 +1,15 @@
 {%extends 'base.html' %}
 {% load static %}
+{% block optscript %}
+<link href="{%static "css/style.css"%}" rel="stylesheet">
+{% endblock %}
+{%block pageheader %}
+Dashboard
+{%endblock%}
+{%block subheader %}
+subtitle
+{%endblock%}
+{% load static %}
 {%block content %}
       <div class="row bt-border top-margin">
         <section class="col-xs-6">

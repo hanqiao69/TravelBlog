@@ -2,17 +2,7 @@
 @import url("font-awesome.min.css");
 @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
 
-body {
-  background: #fff;
-}
 
-body,input,textarea,select {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 300;
-  color: #52575c;
-  line-height: 1.75em;
-  font-size: 15pt;
-}
 
 h1,h2,h3,h4,h5,h6 {
   font-weight: 400;
@@ -27,25 +17,6 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 h2 {
   font-size: 1.4em;
   line-height: 1.25em;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-  -moz-transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out, background-color 0.25s ease-in-out;
-  -webkit-transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out, background-color 0.25s ease-in-out;
-  -o-transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out, background-color 0.25s ease-in-out;
-  -ms-transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out, background-color 0.25s ease-in-out;
-  transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out, background-color 0.25s ease-in-out;
-}
-
-a:hover {
-  color: #53afd7;
-}
-
-strong, b {
-  font-weight: 400;
-  color: #42474c;
 }
 
 em, i {
@@ -184,94 +155,7 @@ header > p {
   padding: 1em 0 3em 0;
   background-color: #53afd7;
 }
-.navbar {
-  background-color: #4ea9e5;
-  border-color: #2e82be;
-}
-.navbar .navbar-brand {
-  color: #ecf0f1;
-}
-.navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
-  color: #f8fafe;
-}
-.navbar .navbar-text {
-  color: #ecf0f1;
-}
-.navbar .navbar-nav > li > a {
-  color: #ecf0f1;
-}
-.navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus {
-  color: #f8fafe;
-}
-.navbar .navbar-nav > .active > a, .navbar .navbar-nav > .active > a:hover, .navbar .navbar-nav > .active > a:focus {
-  color: #f8fafe;
-  background-color: #2e82be;
-}
-.navbar .navbar-nav > .open > a, .navbar .navbar-nav > .open > a:hover, .navbar .navbar-nav > .open > a:focus {
-  color: #f8fafe;
-  background-color: #2e82be;
-}
-.navbar .navbar-toggle {
-  border-color: #2e82be;
-}
-.navbar .navbar-toggle:hover, .navbar .navbar-toggle:focus {
-  background-color: #2e82be;
-}
-.navbar .navbar-toggle .icon-bar {
-  background-color: #ecf0f1;
-}
-.navbar .navbar-collapse,
-.navbar .navbar-form {
-  border-color: #ecf0f1;
-}
-.navbar .navbar-link {
-  color: #ecf0f1;
-}
-.navbar .navbar-link:hover {
-  color: #f8fafe;
-}
 
-@media (max-width: 767px) {
-  .navbar .navbar-nav .open .dropdown-menu > li > a {
-    color: #ecf0f1;
-  }
-  .navbar .navbar-nav .open .dropdown-menu > li > a:hover, .navbar .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #f8fafe;
-  }
-  .navbar .navbar-nav .open .dropdown-menu > .active > a, .navbar .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #f8fafe;
-    background-color: #2e82be;
-  }
-}
-
-#logo {
-  float: left;
-  display: inline-block;
-  margin-top:0px;
-}
-
-#logo a {
-  color: #fff;
-  display: block;
-  font-weight: 300;
-  font-size: 1em;
-  letter-spacing: 1px;
-  border: none;
-  text-transform: uppercase;
-  margin-top:2px;
-}
-
-#logo a:hover {
-  color: #fff;
-  display: block;
-  font-weight: 300;
-  font-size: 1em;
-  letter-spacing: 1px;
-  border: none;
-  text-transform: uppercase;
-  text-decoration: none;
-  margin-top:2px;
-}
 .picture{
     height:150px;
     width:150px;

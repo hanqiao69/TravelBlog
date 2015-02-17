@@ -23,9 +23,11 @@ def home(request):
         return redirect('/profile/update')
     else:
         return render_to_response("index.html", RequestContext(request))
+@login_required(login_url='/accounts/login')
+def dash(request):
+    return render_to_response('dashcontent.html', RequestContext(request))
 
-
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login')
 def group(request, group_id):
     # user = CustomUser.objects.get(username=request.user)
     query = Group.objects.all().filter(id=group_id)
@@ -44,7 +46,7 @@ def brand(request):
     return render_to_response("brand.html", RequestContext(request))
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login')
 def campaigns(request):
     user = CustomUser.objects.get(username=request.user)
     user_profile = user.get_user_profile()
@@ -54,7 +56,7 @@ def campaigns(request):
     return render_to_response("groups.html", data, RequestContext(request))
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login')
 def profile(request, user_id):
     user = CustomUser.objects.get(id=user_id)
     user_profile = user.get_user_profile()
@@ -75,7 +77,7 @@ def publicprofile(request, username_user):
     return render_to_response('profile.html', data, RequestContext(request))
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login')
 def profileself(request):
     print request
     user = CustomUser.objects.get(username=request.user)
@@ -87,12 +89,11 @@ def profileself(request):
 
     return render_to_response('profile.html', data, RequestContext(request))
 
-
 class UploadFileForm(forms.Form):
     image_file = forms.FileField(label='Select a file')
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login')
 def calupdate(request):
     if request.POST.get('mybtn'):
         string1 = ""
@@ -139,7 +140,7 @@ def handle_uplaoded_file(user, file_):
             destination.write(chunk)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login')
 def update_image(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
