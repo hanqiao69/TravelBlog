@@ -15,6 +15,43 @@ from django.contrib.auth.decorators import login_required
 # from allauth.socialaccount.models import SocialToken
 # from allauth.socialaccount.models import SocialAccount
 
+precip_url = {"jan": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883644005&amp;format=interactive",
+       "feb": "",
+       "mar": "",
+       "apr": "",
+       "may": "",
+       "jun": "",
+       "jul": "",
+       "aug": "",
+       "sep": "",
+       "oct": "",
+       "nov": "",
+       "dec": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883644005&amp;format=interactive"}
+
+temp_url = {"jan": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883644005&amp;format=interactive",
+       "feb": "",
+       "mar": "",
+       "apr": "",
+       "may": "",
+       "jun": "",
+       "jul": "",
+       "aug": "",
+       "sep": "",
+       "oct": "",
+       "nov": "",
+       "dec": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883644005&amp;format=interactive"}
+text_month = {"jan": "January",
+       "feb": "February",
+       "mar": "March",
+       "apr": "April",
+       "may": "May",
+       "jun": "June",
+       "jul": "July",
+       "aug": "August",
+       "sep": "September",
+       "oct": "October",
+       "nov": "November",
+       "dec": "December"}
 
 # Create your views here.
 def home(request):
@@ -23,6 +60,14 @@ def home(request):
         return redirect('/profile/update')
     else:
         return render_to_response("index.html", RequestContext(request))
+def climate(request, month):
+    precip_src = precip_url[month]
+    temp_src = temp_url[month]
+    text = text_month[month]
+    data = {"text_mon":text, "precip": precip_src, "temp": temp_src}
+    return render_to_response('climate.html', data, RequestContext(request))
+
+
 @login_required(login_url='/accounts/login')
 def dash(request):
     return render_to_response('dashcontent.html', RequestContext(request))

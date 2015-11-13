@@ -118,8 +118,6 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
-import django
-django.setup()
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model

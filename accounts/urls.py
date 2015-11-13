@@ -26,5 +26,7 @@ urlpatterns = patterns(
     url(r'^profile/update/image$', update_image, name='update_image'),
     url(r'^brand/$', brand),
     url(r'^dash/$', dash),
+    url(r'^climate/(?P<month>[\w.@+-]+)/$', climate),
+    
 )
 urlpatterns += staticfiles_urlpatterns()
