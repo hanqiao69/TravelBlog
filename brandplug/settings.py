@@ -76,11 +76,20 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+ 'default': {
+ 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+ 'NAME': 'd94rd86hua2t80', 
+ 'USER': 'jfaajardwpauiz',
+ 'PASSWORD': 'AT3DU5niSOJE21aIeLxB2NdnsR',
+ 'HOST': 'ec2-54-197-230-210.compute-1.amazonaws.com'
+ }
 }
 
 # Internationalization
@@ -109,15 +118,25 @@ ACCOUNT_EMAIL_REQUIRED = False
 from os import path
 
 PROJECT_ROOT = path.dirname(path.abspath(path.dirname(__file__)))
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+#DATABASES['default'] = dj_database_url.config()
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/'
+STATICFILES_DIRS = (
+ os.path.join(BASE_DIR, 'static'),
+)
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model

@@ -69,7 +69,8 @@ def home(request):
     if len(query):
         return redirect('/profile/update')
     else:
-        return render_to_response("index.html", RequestContext(request))
+        return redirect('/currency')
+        #return render_to_response("index.html", RequestContext(request))
 def climate(request, month):
     precip_src = precip_url[month]
     temp_src = temp_url[month]
