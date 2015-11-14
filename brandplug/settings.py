@@ -137,9 +137,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
  os.path.join(BASE_DIR, 'static'),
 )
-
-from django.contrib import admin
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
-admin.site.register(User)
