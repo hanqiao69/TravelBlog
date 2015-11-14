@@ -9,6 +9,28 @@ from django.db.models.signals import post_save
 # from allauth.socialaccount.models import SocialToken
 from allauth.socialaccount.models import SocialAccount
 # import hashlib
+import cPickle
+
+class Currency(models.Model):
+    code = models.CharField(max_length=3, unique=True)
+    name = models.CharField(max_length=500)
+    #current = models.FloatField(null=True, blank=True)
+    current_updated = models.DateField(null=True, blank=True)
+    #five_yr_mean = models.FloatField(null=True, blank=True)
+    #five_yr_stdev = models.FloatField(null=True, blank=True)
+    #five_yr_values = models.TextField(null=True, blank=True)
+    #z_score = models.FloatField(null=True, blank=True)
+    #percent_change = models.FloatField(null=True, blank=True)
+
+class Country(models.Model):
+    code = models.CharField(max_length=3, unique=True)
+    name = models.CharField(max_length=500)
+    currency = models.ManyToManyField(Currency, null=True, blank=True)
+    temperature = models.TextField(null=True, blank=True) #temperature is array of length 13 (fahrenheit), one for each month and avg
+    rainfall = models.TextField(null=True, blank=True) #precip is array of length 13 (mm), one for each month and avg
+    rainy_dry = models.TextField(null=True, blank=True) #rainy_dry is array of length 12, one for each month
+    homocides = models.IntegerField(null=True, blank=True)
+    peace_index = models.TextField(null=True, blank=True)
 
 
 # ---DATABASE-MODELS------------------------------------------------------
@@ -77,6 +99,7 @@ class CorporateProfile(UserProfile):
 
     def __unicode__(self):
         return self.company
+
 
 
 class WeekCalendar(models.Model):

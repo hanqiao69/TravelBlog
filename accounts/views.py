@@ -14,7 +14,6 @@ from accounts.models import CustomUser, Group
 from django.contrib.auth.decorators import login_required
 # from allauth.socialaccount.models import SocialToken
 # from allauth.socialaccount.models import SocialAccount
-
 precip_url = {"jan": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883644005&amp;format=interactive",
        "feb": "",
        "mar": "",
@@ -27,7 +26,18 @@ precip_url = {"jan": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axp
        "oct": "",
        "nov": "",
        "dec": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883644005&amp;format=interactive"}
-
+precip_chart_url = {"jan": "",
+       "feb": "",
+       "mar": "",
+       "apr": "",
+       "may": "",
+       "jun": "",
+       "jul": "",
+       "aug": "",
+       "sep": "",
+       "oct": "",
+       "nov": "",
+       "dec": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=2014329076&amp;format=interactive"}
 temp_url = {"jan": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883644005&amp;format=interactive",
        "feb": "",
        "mar": "",
@@ -39,7 +49,7 @@ temp_url = {"jan": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4
        "sep": "",
        "oct": "",
        "nov": "",
-       "dec": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883644005&amp;format=interactive"}
+       "dec": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1670414277&amp;format=interactive"}
 text_month = {"jan": "January",
        "feb": "February",
        "mar": "March",
@@ -64,9 +74,14 @@ def climate(request, month):
     precip_src = precip_url[month]
     temp_src = temp_url[month]
     text = text_month[month]
-    data = {"text_mon":text, "precip": precip_src, "temp": temp_src}
+    precip_chart_src = precip_chart_url[month]
+    data = {"text_mon":text, "precip": precip_src, "precip_chart": precip_chart_src, "temp": temp_src}
     return render_to_response('climate.html', data, RequestContext(request))
-
+def currency(request):
+    chart = "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883251703&amp;format=interactive"
+    map_five_chart = "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=489787441&amp;format=interactive"
+    data = {"chart":chart, "map_five_chart":map_five_chart}
+    return render_to_response('currency.html', data, RequestContext(request))
 
 @login_required(login_url='/accounts/login')
 def dash(request):
