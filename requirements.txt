@@ -6,7 +6,6 @@ backports-abc==0.4
 backports.ssl-match-hostname==3.4.0.2
 bdist-mpkg==0.5.0
 beautifulsoup4==4.3.2
-bonjour-py==0.3
 certifi==2015.09.06.2
 dj-database-url==0.3.0
 dj-static==0.0.6
