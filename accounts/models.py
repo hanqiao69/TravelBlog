@@ -14,12 +14,12 @@ import cPickle
 class Currency(models.Model):
     code = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=500)
-    #current = models.FloatField(null=True, blank=True)
+    current = models.FloatField(null=True, blank=True, max_digits=19, decimal_places=3)
     current_updated = models.DateField(null=True, blank=True)
-    #five_yr_mean = models.FloatField(null=True, blank=True)
-    #five_yr_stdev = models.FloatField(null=True, blank=True)
+    five_yr_mean = models.FloatField(null=True, blank=True, max_digits=19, decimal_places=3)
+    five_yr_stdev = models.FloatField(null=True, blank=True, max_digits=19, decimal_places=3)
     #five_yr_values = models.TextField(null=True, blank=True)
-    #z_score = models.FloatField(null=True, blank=True)
+    z_score = models.FloatField(null=True, blank=True, max_digits=5, decimal_places=3)
     #percent_change = models.FloatField(null=True, blank=True)
 
 class Country(models.Model):
@@ -29,8 +29,8 @@ class Country(models.Model):
     temperature = models.TextField(null=True, blank=True) #temperature is array of length 13 (fahrenheit), one for each month and avg
     rainfall = models.TextField(null=True, blank=True) #precip is array of length 13 (mm), one for each month and avg
     rainy_dry = models.TextField(null=True, blank=True) #rainy_dry is array of length 12, one for each month
-    homocides = models.IntegerField(null=True, blank=True)
-    peace_index = models.TextField(null=True, blank=True)
+    #homocides = models.IntegerField(null=True, blank=True)
+    #peace_index = models.TextField(null=True, blank=True)
 
 
 # ---DATABASE-MODELS------------------------------------------------------
