@@ -14,12 +14,12 @@ import cPickle
 class Currency(models.Model):
     code = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=500)
-    current = models.FloatField(null=True, blank=True, max_digits=19, decimal_places=3)
+    #current = models.FloatField(null=True, blank=True, max_digits=19, decimal_places=3)
     current_updated = models.DateField(null=True, blank=True)
-    five_yr_mean = models.FloatField(null=True, blank=True, max_digits=19, decimal_places=3)
-    five_yr_stdev = models.FloatField(null=True, blank=True, max_digits=19, decimal_places=3)
+    #five_yr_mean = models.FloatField(null=True, blank=True, max_digits=19, decimal_places=3)
+    #five_yr_stdev = models.FloatField(null=True, blank=True, max_digits=19, decimal_places=3)
     #five_yr_values = models.TextField(null=True, blank=True)
-    z_score = models.FloatField(null=True, blank=True, max_digits=5, decimal_places=3)
+    #z_score = models.FloatField(null=True, blank=True, max_digits=5, decimal_places=3)
     #percent_change = models.FloatField(null=True, blank=True)
 
 class Country(models.Model):
