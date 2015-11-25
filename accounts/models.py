@@ -25,13 +25,24 @@ class Currency(models.Model):
 class Country(models.Model):
     code = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=500)
-    currency = models.ManyToManyField(Currency, null=True, blank=True)
+    #currency = models.ManyToManyField(Currency, null=True, blank=True)
     temperature = models.TextField(null=True, blank=True) #temperature is array of length 13 (fahrenheit), one for each month and avg
     rainfall = models.TextField(null=True, blank=True) #precip is array of length 13 (mm), one for each month and avg
     rainy_dry = models.TextField(null=True, blank=True) #rainy_dry is array of length 12, one for each month
+    safety = models.FloatField(null=True, blank=True)
+    health = models.FloatField(null=True, blank=True)
+    internet = models.FloatField(null=True, blank=True)
+    travel = models.FloatField(null=True, blank=True)
+    openness = models.FloatField(null=True, blank=True)
+    price = models.FloatField(null=True, blank=True)
+    environment = models.FloatField(null=True, blank=True)
+    air = models.FloatField(null=True, blank=True)
+    ground = models.FloatField(null=True, blank=True)
+    tourist = models.FloatField(null=True, blank=True)
+    nature = models.FloatField(null=True, blank=True)
+    culture = models.FloatField(null=True, blank=True)
     #homocides = models.IntegerField(null=True, blank=True)
     #peace_index = models.TextField(null=True, blank=True)
-
 
 # ---DATABASE-MODELS------------------------------------------------------
 class CustomUser(AbstractUser):
