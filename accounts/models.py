@@ -25,7 +25,7 @@ class Currency(models.Model):
 class Country(models.Model):
     code = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=500)
-    #currency = models.ManyToManyField(Currency, null=True, blank=True)
+    currency = models.ManyToManyField(Currency, null=True, blank=True)
     temperature = models.TextField(null=True, blank=True) #temperature is array of length 13 (fahrenheit), one for each month and avg
     rainfall = models.TextField(null=True, blank=True) #precip is array of length 13 (mm), one for each month and avg
     rainy_dry = models.TextField(null=True, blank=True) #rainy_dry is array of length 12, one for each month
