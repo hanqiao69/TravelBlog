@@ -83,6 +83,15 @@ def currency(request):
     map_five_chart = "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=489787441&amp;format=interactive"
     data = {"chart":chart, "map_five_chart":map_five_chart}
     return render_to_response('currency.html', data, RequestContext(request))
+def ranking(request):
+    data = {}
+    if request.POST.get('mybtn'):
+        string1 = ""
+        for i in range(0, 12):
+            print request.POST.get(str(i))
+            data["ranking"+str(i)] = request.POST.get(str(i))
+    return render_to_response('rankings.html', data, RequestContext(request))
+
 
 @login_required(login_url='/accounts/login')
 def dash(request):

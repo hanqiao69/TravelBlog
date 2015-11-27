@@ -1,0 +1,90 @@
+{%extends 'basenew.html' %}
+{% load staticfiles %}
+{%block pageheader %}
+Rankings
+{%endblock%}
+{%block subheader %}
+{%endblock%}
+{%block content %}
+			<section id="more-works">
+				<div class="container inner-bottom">
+					<div class="row">
+						<div class="col-sm-12">
+							<div id="accordion" class="panel-group blank">
+								<div class="panel panel-default">			  
+									
+									<div class="panel-heading text-center">
+										<h4 class="panel-title">
+											<a class="panel-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#content">
+												<span>Adjust Preferences</span>
+											</a>
+										</h4>
+									</div><!-- /.panel-heading -->
+									
+									<div id="content" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<div class="portfolio">
+												
+												<!--FORM-->
+
+<form action="#" method="post">
+  {% csrf_token %}
+<div style="margin:50px">
+	<table width=100%>
+		<tr>
+			<td width="40%"><label>Importance</label></td><td>
+			<td width="25%"><label>0</label></td>
+			<td width="15%"><label style='display: block;text-align:center'>4</label></td>
+			<td width="15%"><label style="float:right">7</label></td></tr>
+		<tr>
+			<td width="40%"><label></label></td><td>
+			<td width="20%"><label>Not <br/>Important</label></td>
+			<td width="20%"><label style="display: block; text-align:center">Somewhat Important</label></td>
+			<td width="20%"><label style="float:right">Crucial</label></td></tr>
+	</table>
+	<table width=100%><tr>
+			<td width="40%"><label>Safety</label></td><td>
+ <input type="range" name="0" id="points" value="{{ranking0}}" min="0" max="7"></td></tr>
+ <tr><td><label>Health</label></td><td>
+ <input type="range" name="1" id="points" value="{{ranking1}}" min="0" max="7"></td></tr>
+ <tr><td><label>Internet</label></td><td>
+ <input type="range" name="2" id="points" value="{{ranking2}}" min="0" max="7"></td></tr>
+ <tr><td><label>Travel</label></td><td>
+ <input type="range" name="3" id="points" value="{{ranking3}}" min="0" max="7"></td></tr>
+ <tr><td><label>Internatonal Openness</label></td><td>
+ <input type="range" name="4" id="points" value="{{ranking4}}" min="0" max="7"></td></tr>
+ <tr><td><label>Price</label></td><td>
+ <input type="range" name="5" id="points" value="{{ranking5}}" min="0" max="7"></td></tr>
+ <tr><td><label>Environmental Sustainability</label></td><td>
+ <input type="range" name="6" id="points" value="{{ranking6}}" min="0" max="7"></td></tr>
+ <tr><td><label>Air Infrastructure</label></td><td>
+ <input type="range" name="7" id="points" value="{{ranking7}}" min="0" max="7"></td></tr>
+ <tr><td><label>Ground Infrastructure</label></td><td>
+ <input type="range" name="8" id="points" value="{{ranking8}}" min="0" max="7"></td></tr>
+ <tr><td><label>Focus on Tourism</label></td><td>
+ <input type="range" name="9" id="points" value="{{ranking9}}" min="0" max="7"></td></tr>
+ <tr><td><label>Natural Resources</label></td><td>
+ <input type="range" name="10" id="points" value="{{ranking10}}" min="0" max="7"></td></tr>
+ <tr><td><label>Cultural Resources</label></td><td>
+ <input type="range" name="11" id="points" value="{{ranking11}}" min="0" max="7"></td></tr>
+</table>
+
+</div>
+ <input type="submit" class="btn" value="Update Rankings" name="mybtn">
+												
+												
+												<!--/FORM-->
+											</div><!-- /.portfolio -->
+										</div><!-- /.panel-body -->
+									</div><!-- /.content -->
+									
+								</div><!-- /.panel -->
+							</div><!-- /.accordion -->
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.container -->
+			</section>
+
+
+
+{%endblock%}

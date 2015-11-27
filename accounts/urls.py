@@ -28,6 +28,7 @@ urlpatterns = patterns(
     url(r'^dash/$', dash),
     url(r'^currency/$', currency),
     url(r'^climate/(?P<month>[\w.@+-]+)/$', climate),
+    url(r'^ranking/$', ranking),
     
 )
 urlpatterns += staticfiles_urlpatterns()
