@@ -1,4 +1,5 @@
 import os
+import operator
 
 from django import forms
 from django.shortcuts import redirect, render_to_response
@@ -7,9 +8,10 @@ from django.shortcuts import redirect, render_to_response
 # from django.http import HttpResponseRedirect
 # from django.http import HttpResponse, StreamingHttpResponse
 from django.template import RequestContext
+from django.forms.models import model_to_dict
 # from django.template import Context, Template
 # from django.core import serializers
-from accounts.models import CustomUser, Group
+from accounts.models import CustomUser, Group, Country
 # import datetime
 from django.contrib.auth.decorators import login_required
 # from allauth.socialaccount.models import SocialToken
@@ -85,11 +87,33 @@ def currency(request):
     return render_to_response('currency.html', data, RequestContext(request))
 def ranking(request):
     data = {}
+    preferences = []
     if request.POST.get('mybtn'):
-        string1 = ""
+        sum_total = 0
         for i in range(0, 12):
             print request.POST.get(str(i))
+            sum_total += int(request.POST.get(str(i)))
+            preferences.append(int(request.POST.get(str(i))))
             data["ranking"+str(i)] = request.POST.get(str(i))
+        for i in range(0, 12):
+          preferences[i] = float(preferences[i])/sum_total
+        data["preferences"] = preferences
+        query_countries = Country.objects.all()
+        countries_display = []
+        order = ["safety", "health", "internet", "travel", "openness", "price", "environment", "air", "ground", "tourist", "nature", "culture"]
+        for country in query_countries:
+          dict_country = model_to_dict(country)
+          rank_list = []
+          for criteria in order:
+            rank_list.append(dict_country[criteria])
+          multiplied = [float(a)*b for a,b in zip(preferences,rank_list)]
+          ranking_final = sum(multiplied)
+          dict_country["ranking"] = ranking_final
+          print dict_country
+          countries_display.append(dict_country)
+        countries_display.sort(key=operator.itemgetter('ranking'))
+        data["countries"] = countries_display
+        print countries_display
     return render_to_response('rankings.html', data, RequestContext(request))
 
 
