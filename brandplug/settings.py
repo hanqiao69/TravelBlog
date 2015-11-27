@@ -49,7 +49,6 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.instagram',
-    'csvimport.app.CSVImportConf',
 )
 ROOT_URLCONF = 'brandplug.urls'
 AUTHENTICATION_BACKENDS = (
