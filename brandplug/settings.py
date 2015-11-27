@@ -85,10 +85,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DATABASES = {
  'default': {
  'ENGINE': 'django.db.backends.postgresql_psycopg2',
- 'NAME': 'd9729ktj2vgss4', 
- 'USER': 'soxgbyzrzknsiz',
- 'PASSWORD': 'AD-VS_oz6dMUAzm2M7aZQ1pA0h',
- 'HOST': 'ec2-50-16-238-141.compute-1.amazonaws.com'
+ 'NAME': 'dc6rk6b9qices8', 
+ 'USER': 'wqocpxgqevuekc',
+ 'PASSWORD': 'PWNl9Z_9wM9JRvlRZH1bP1k1b_',
+ 'HOST': 'ec2-54-83-203-50.compute-1.amazonaws.com'
  }
 }
 
