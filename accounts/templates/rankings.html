@@ -85,6 +85,26 @@ Rankings
 				</div><!-- /.container -->
 			</section>
 
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Ranking</th>
+                <th>Safety</th>
+                <th>Health</th>
+            </tr>
+        </thead>
+        <tbody>
+        	{% for country in countries %}
+            <tr>
+                <td>{{country.name}}</td>
+                <td>{{country.ranking}}</td>
+                <td>{{country.safety}}</td>
+                <td>{{country.health}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 
 {%endblock%}

@@ -111,7 +111,7 @@ def ranking(request):
           dict_country["ranking"] = ranking_final
           print dict_country
           countries_display.append(dict_country)
-        countries_display.sort(key=operator.itemgetter('ranking'))
+        countries_display.sort(key=operator.itemgetter('ranking'), reverse=True)
         data["countries"] = countries_display
         print countries_display
     return render_to_response('rankings.html', data, RequestContext(request))
