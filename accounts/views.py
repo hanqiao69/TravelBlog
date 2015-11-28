@@ -88,13 +88,15 @@ def currency(request):
 def ranking(request):
     data = {}
     preferences = []
+    for i in range(0, 12):
+            data["ranking"+str(i)] = 0
     if request.POST.get('mybtn'):
         sum_total = 0
         for i in range(0, 12):
             print request.POST.get(str(i))
             sum_total += int(request.POST.get(str(i)))
             preferences.append(int(request.POST.get(str(i))))
-            data["ranking"+str(i)] = request.POST.get(str(i))
+            data["ranking"+str(i)] = int(request.POST.get(str(i)))
         for i in range(0, 12):
           preferences[i] = float(preferences[i])/sum_total
         data["preferences"] = preferences

@@ -1,9 +1,10 @@
 {%extends 'basenew.html' %}
 {% load staticfiles %}
 {%block pageheader %}
-Rankings
+Rankings - 
 {%endblock%}
 {%block subheader %}
+Find me my happy place...
 {%endblock%}
 {%block content %}
 		<script src="{%static "js/jquery.min.js"%}"></script>
@@ -110,8 +111,52 @@ $(document).ready(function(){
     });
 });
 </script>
+
+{% if ranking0 > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#safety').click();});</script>
+{%endif%}
+{% if ranking1  > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#health').click();});</script>
+{%endif%}
+{% if ranking2  > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#internet').click();});</script>
+{%endif%}
+{% if ranking3  > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#travel').click();});</script>
+{%endif%}
+{% if ranking4  > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#openness').click();});</script>
+{%endif%}
+{% if ranking5  > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#price').click();});</script>
+{%endif%}
+{% if ranking6  > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#environment').click();});</script>
+{%endif%}
+{% if ranking7  > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#air').click();});</script>
+{%endif%}
+{% if ranking8  > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#ground').click();});</script>
+{%endif%}
+{% if ranking9  > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#tourism').click();});</script>
+{%endif%}
+{% if ranking10  > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#nature').click();});</script>
+{%endif%}
+{% if ranking11  > 0 %}
+<script type="text/javascript">$(document).ready(function(){$('#culture').click();});</script>
+{%endif%}
+
 </div>
- <input type="submit" class="btn" value="Adjust Preferences" name="mybtn" data-toggle="collapse" data-parent="#accordion1" href="#content">
+									<div class="panel-heading text-center">
+										<h4 class="panel-title">
+											<a class="panel-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#content">
+												<span>Adjust Preferences</span>
+											</a>
+										</h4>
+									</div><!-- /.panel-heading -->
 												
 												
 												<!--/FORM-->
