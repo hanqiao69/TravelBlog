@@ -309,42 +309,42 @@ $(document).ready(function(){
         	{% for country in countries %}
             <tr>
                 <td>{{country.name}}</td>
-                <td>{{country.ranking}}</td>
+                <td>{{country.ranking|floatformat:2}}</td>
                 {% if ranking0 > 0 %}
-                	<td>{{country.safety}}</td>
+                	<td>{{country.safety|floatformat:2}}</td>
                 {%endif%}
                 {% if ranking1 > 0 %}
-                	<td>{{country.health}}</td>
+                	<td>{{country.health|floatformat:2}}</td>
                 {%endif%}                
                 {% if ranking2 > 0 %}
-                	<td>{{country.internet}}</td>
+                	<td>{{country.internet|floatformat:2}}</td>
                 {%endif%}
                 {% if ranking3 > 0 %}
-                	<td>{{country.travel}}</td>
+                	<td>{{country.travel|floatformat:2}}</td>
                 {%endif%}                
                 {% if ranking4 > 0 %}
-                	<td>{{country.openness}}</td>
+                	<td>{{country.openness|floatformat:2}}</td>
                 {%endif%}
                 {% if ranking5 > 0 %}
-                	<td>{{country.price}}</td>
+                	<td>{{country.price|floatformat:2}}</td>
                 {%endif%}
                 {% if ranking6 > 0 %}
-                	<td>{{country.environment}}</td>
+                	<td>{{country.environment|floatformat:2}}</td>
                 {%endif%}
                 {% if ranking7 > 0 %}
-                	<td>{{country.air}}</td>
+                	<td>{{country.air|floatformat:2}}</td>
                 {%endif%}
                 {% if ranking8 > 0 %}
-                	<td>{{country.ground}}</td>
+                	<td>{{country.ground|floatformat:2}}</td>
                 {%endif%}
                 {% if ranking9 > 0 %}
-                	<td>{{country.tourist}}</td>
+                	<td>{{country.tourist|floatformat:2}}</td>
                 {%endif%}
                 {% if ranking10 > 0 %}
-                	<td>{{country.nature}}</td>
+                	<td>{{country.nature|floatformat:2}}</td>
                 {%endif%}
                 {% if ranking11 > 0 %}
-                	<td>{{country.culture}}</td>
+                	<td>{{country.culture|floatformat:2}}</td>
                 {%endif%}
             </tr>
             {% endfor %}
