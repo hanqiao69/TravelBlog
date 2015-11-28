@@ -6,20 +6,140 @@ Rankings
 {%block subheader %}
 {%endblock%}
 {%block content %}
+		<script src="{%static "js/jquery.min.js"%}"></script>
 			<section id="more-works">
 				<div class="container inner-bottom">
+
+<div class="row">
+						<div class="col-sm-12">
+							<div id="accordion1" class="panel-group blank">
+								<div class="panel panel-default">			  
+									
+									<div class="panel-heading text-center">
+										<h4 class="panel-title">
+											<a class="panel-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#content1">
+												<span>Pick Criteria</span>
+											</a>
+										</h4>
+									</div><!-- /.panel-heading -->
+									
+									<div id="content1" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<div class="portfolio">
+												
+												<!--FORM-->
+
+<div style="margin:50px">
+	<table width=100%>
+			<tr><td width="40%"><input type="button" class="btn btn-gray" value="Safety" id="safety"></td><td width="10%"></td>
+			<td width="40%"><input type="button" class="btn btn-gray" value="Health" id="health"></td></tr>
+			<tr><td><input type="button" class="btn btn-gray" value="Internet" id="internet"></td><td width="10%"></td>
+			<td><input type="button" class="btn btn-gray" value="Travel" id="travel"></td></tr>
+			<tr><td><input type="button" class="btn btn-gray" value="International Openness" id="openness"></td><td width="10%"></td>
+			<td><input type="button" class="btn btn-gray" value="Price" id="price"></td></tr>
+			<tr><td><input type="button" class="btn btn-gray" value="Environmental Sustainability" id="environment"></td><td width="10%"></td>
+			<td><input type="button" class="btn btn-gray" value="Air Infrastructure" id="air"></td></tr>
+			<tr><td><input type="button" class="btn btn-gray" value="Ground Infrastructure" id="ground"></td><td width="10%"></td>
+			<td><input type="button" class="btn btn-gray" value="Focus on Tourism" id="tourism"></td></tr>
+			<tr><td><input type="button" class="btn btn-gray" value="Natural Life" id="nature"></td><td width="10%"></td>
+			<td><input type="button" class="btn btn-gray" value="Cultural Resources" id="culture"></td></tr>
+</table>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#safety').on('click', function(event) {        
+         $('#safety-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+    $('#health').on('click', function(event) {        
+         $('#health-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+    $('#internet').on('click', function(event) {        
+         $('#internet-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+    $('#travel').on('click', function(event) {        
+         $('#travel-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+    $('#openness').on('click', function(event) {        
+         $('#openness-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+    $('#price').on('click', function(event) {        
+         $('#price-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+    $('#environment').on('click', function(event) {        
+         $('#environment-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+    $('#air').on('click', function(event) {        
+         $('#air-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+    $('#ground').on('click', function(event) {        
+         $('#ground-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+    $('#tourism').on('click', function(event) {        
+         $('#tourism-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+    $('#nature').on('click', function(event) {        
+         $('#nature-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+    $('#culture').on('click', function(event) {        
+         $('#culture-row').toggle('show');
+         $(this).toggleClass("btn-green");
+         $(this).toggleClass("btn-gray");
+    });
+});
+</script>
+</div>
+ <input type="submit" class="btn" value="Adjust Preferences" name="mybtn" data-toggle="collapse" data-parent="#accordion1" href="#content">
+												
+												
+												<!--/FORM-->
+											</div><!-- /.portfolio -->
+										</div><!-- /.panel-body -->
+									</div><!-- /.content -->
+									
+								</div><!-- /.panel -->
+							</div><!-- /.accordion -->
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+
+
+
+
+
+
+
+
+
+
+
+
 					<div class="row">
 						<div class="col-sm-12">
 							<div id="accordion" class="panel-group blank">
 								<div class="panel panel-default">			  
 									
-									<div class="panel-heading text-center">
-										<h4 class="panel-title">
-											<a class="panel-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#content">
-												<span>Adjust Preferences</span>
-											</a>
-										</h4>
-									</div><!-- /.panel-heading -->
 									
 									<div id="content" class="panel-collapse collapse in">
 										<div class="panel-body">
@@ -42,30 +162,42 @@ Rankings
 			<td width="20%"><label style="display: block; text-align:center">Somewhat Important</label></td>
 			<td width="20%"><label style="float:right">Crucial</label></td></tr>
 	</table>
-	<table width=100%><tr>
+	<table width=100%>
+		<tr id="safety-row" style="display:none;">
 			<td width="40%"><label>Safety</label></td><td>
  <input type="range" name="0" id="points" value="{{ranking0}}" min="0" max="7"></td></tr>
- <tr><td><label>Health</label></td><td>
+
+ <tr id="health-row" style="display:none;"><td width="40%"><label>Health</label></td><td>
  <input type="range" name="1" id="points" value="{{ranking1}}" min="0" max="7"></td></tr>
- <tr><td><label>Internet</label></td><td>
+
+ <tr id="internet-row" style="display:none;"><td width="40%"><label>Internet</label></td><td>
  <input type="range" name="2" id="points" value="{{ranking2}}" min="0" max="7"></td></tr>
- <tr><td><label>Travel</label></td><td>
+
+ <tr id="travel-row" style="display:none;"><td width="40%"><label>Travel</label></td><td>
  <input type="range" name="3" id="points" value="{{ranking3}}" min="0" max="7"></td></tr>
- <tr><td><label>Internatonal Openness</label></td><td>
+
+ <tr id="openness-row" style="display:none;"><td width="40%"><label>Internatonal Openness</label></td><td>
  <input type="range" name="4" id="points" value="{{ranking4}}" min="0" max="7"></td></tr>
- <tr><td><label>Price</label></td><td>
+
+ <tr id="price-row" style="display:none;"><td width="40%"><label>Price</label></td><td>
  <input type="range" name="5" id="points" value="{{ranking5}}" min="0" max="7"></td></tr>
- <tr><td><label>Environmental Sustainability</label></td><td>
+
+ <tr id="environment-row" style="display:none;"><td width="40%"><label>Environmental Sustainability</label></td><td>
  <input type="range" name="6" id="points" value="{{ranking6}}" min="0" max="7"></td></tr>
- <tr><td><label>Air Infrastructure</label></td><td>
+
+ <tr id="air-row" style="display:none;"><td width="40%"><label>Air Infrastructure</label></td><td>
  <input type="range" name="7" id="points" value="{{ranking7}}" min="0" max="7"></td></tr>
- <tr><td><label>Ground Infrastructure</label></td><td>
+
+ <tr id="ground-row" style="display:none;"><td width="40%"><label>Ground Infrastructure</label></td><td>
  <input type="range" name="8" id="points" value="{{ranking8}}" min="0" max="7"></td></tr>
- <tr><td><label>Focus on Tourism</label></td><td>
+
+ <tr id="tourism-row" style="display:none;"><td width="40%"><label>Focus on Tourism</label></td><td>
  <input type="range" name="9" id="points" value="{{ranking9}}" min="0" max="7"></td></tr>
- <tr><td><label>Natural Resources</label></td><td>
+
+ <tr id="nature-row" style="display:none;"><td width="40%"><label>Natural Resources</label></td><td>
  <input type="range" name="10" id="points" value="{{ranking10}}" min="0" max="7"></td></tr>
- <tr><td><label>Cultural Resources</label></td><td>
+
+ <tr id="culture-row" style="display:none;"><td width="40%"><label>Cultural Resources</label></td><td>
  <input type="range" name="11" id="points" value="{{ranking11}}" min="0" max="7"></td></tr>
 </table>
 
