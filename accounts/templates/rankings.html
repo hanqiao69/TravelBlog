@@ -239,7 +239,7 @@ $(document).ready(function(){
  <tr id="tourism-row" style="display:none;"><td width="40%"><label>Tourism Infrastructure</label></td><td>
  <input type="range" name="9" id="points" value="{{ranking9}}" min="0" max="7"></td></tr>
 
- <tr id="nature-row" style="display:none;"><td width="40%"><label>Natural Resources</label></td><td>
+ <tr id="nature-row" style="display:none;"><td width="40%"><label>Natural Life</label></td><td>
  <input type="range" name="10" id="points" value="{{ranking10}}" min="0" max="7"></td></tr>
 
  <tr id="culture-row" style="display:none;"><td width="40%"><label>Cultural Resources</label></td><td>
@@ -267,8 +267,42 @@ $(document).ready(function(){
             <tr>
                 <th>Country</th>
                 <th>Ranking</th>
-                <th>Safety</th>
-                <th>Health</th>
+                {% if ranking0 > 0 %}
+                	<th>Safety</th>
+                {%endif%}
+                {% if ranking1 > 0 %}
+                	<th>Health</th>
+                {%endif%}                
+                {% if ranking2 > 0 %}
+                	<th>Internet</th>
+                {%endif%}
+                {% if ranking3 > 0 %}
+                	<th>Gov't Focus</th>
+                {%endif%}                
+                {% if ranking4 > 0 %}
+                	<th>Openness</th>
+                {%endif%}
+                {% if ranking5 > 0 %}
+                	<th>Price</th>
+                {%endif%}
+                {% if ranking6 > 0 %}
+                	<th>Environment</th>
+                {%endif%}
+                {% if ranking7 > 0 %}
+                	<th>Air Infrastructure</th>
+                {%endif%}
+                {% if ranking8 > 0 %}
+                	<th>Ground Infrastructure</th>
+                {%endif%}
+                {% if ranking9 > 0 %}
+                	<th>Tourism</th>
+                {%endif%}
+                {% if ranking10 > 0 %}
+                	<th>Nature</th>
+                {%endif%}
+                {% if ranking11 > 0 %}
+                	<th>Culture</th>
+                {%endif%}
             </tr>
         </thead>
         <tbody>
@@ -276,8 +310,42 @@ $(document).ready(function(){
             <tr>
                 <td>{{country.name}}</td>
                 <td>{{country.ranking}}</td>
-                <td>{{country.safety}}</td>
-                <td>{{country.health}}</td>
+                {% if ranking0 > 0 %}
+                	<td>{{country.safety}}</td>
+                {%endif%}
+                {% if ranking1 > 0 %}
+                	<td>{{country.health}}</td>
+                {%endif%}                
+                {% if ranking2 > 0 %}
+                	<td>{{country.internet}}</td>
+                {%endif%}
+                {% if ranking3 > 0 %}
+                	<td>{{country.travel}}</td>
+                {%endif%}                
+                {% if ranking4 > 0 %}
+                	<td>{{country.openness}}</td>
+                {%endif%}
+                {% if ranking5 > 0 %}
+                	<td>{{country.price}}</td>
+                {%endif%}
+                {% if ranking6 > 0 %}
+                	<td>{{country.environment}}</td>
+                {%endif%}
+                {% if ranking7 > 0 %}
+                	<td>{{country.air}}</td>
+                {%endif%}
+                {% if ranking8 > 0 %}
+                	<td>{{country.ground}}</td>
+                {%endif%}
+                {% if ranking9 > 0 %}
+                	<td>{{country.tourist}}</td>
+                {%endif%}
+                {% if ranking10 > 0 %}
+                	<td>{{country.nature}}</td>
+                {%endif%}
+                {% if ranking11 > 0 %}
+                	<td>{{country.culture}}</td>
+                {%endif%}
             </tr>
             {% endfor %}
         </tbody>
