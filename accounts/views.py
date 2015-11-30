@@ -97,6 +97,8 @@ def ranking(request):
             sum_total += int(request.POST.get(str(i)))
             preferences.append(int(request.POST.get(str(i))))
             data["ranking"+str(i)] = int(request.POST.get(str(i)))
+        if sum_total == 0:
+          sum_total += 1
         for i in range(0, 12):
           preferences[i] = float(preferences[i])/sum_total
         data["preferences"] = preferences
