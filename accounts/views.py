@@ -145,7 +145,7 @@ def ranking(request):
             temp_for_month = temperature[int(request.POST.get("month"))]
             dict_country["temp_for_month"] = temp_for_month
             if temp_for_month == "":
-              continue
+              pass
             else:
               if request.POST.get("temp") == "below":
                 below_temp = request.POST.get("below_temp")
@@ -163,11 +163,13 @@ def ranking(request):
           if request.POST.get("rainfall"):
             rainy_dry = json.loads(dict_country["rainy_dry"])
             rainy_dry_for_month = rainy_dry[int(request.POST.get("month"))] 
-            dict_country["rainfall_for_month"] = rainy_dry_for_month
-            print rainy_dry_for_month
-            if request.POST.get("rainfall") == "dry" or request.POST.get("rainfall") == "wet":
-              if rainy_dry_for_month != "" and rainy_dry_for_month != capitalize_rain(request.POST.get("rainfall")):
-                exclude = True
+            dict_country["rainy_dry_for_month"] = rainy_dry_for_month
+            if rainy_dry_for_month == "":
+              pass
+            else:
+              if request.POST.get("rainfall") == "dry" or request.POST.get("rainfall") == "wet":
+                if rainy_dry_for_month != "" and rainy_dry_for_month != capitalize_rain(request.POST.get("rainfall")):
+                  exclude = True
           if exclude != True:
             countries_display.append(dict_country)
         countries_display.sort(key=operator.itemgetter('ranking'), reverse=True)
