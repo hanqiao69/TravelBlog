@@ -1,4 +1,5 @@
 {%extends 'basenew.html' %}
+{% load cal_extras %}
 {% load staticfiles %}
 {%block pageheader %}
 Rankings - 
@@ -342,7 +343,7 @@ $(document).ready(function(){
 				</select></td>
 		</tr>
 		<tr id="temperature-row" style="display:none;">
-			<td width="30%"><label>I want the temperature to be:</label></td>
+			<td width="30%"><label>I want the temperature to be (°F):</label></td>
 			<td>
 <ul class="temperature">
 <li>
@@ -446,10 +447,10 @@ $(document).ready(function(){
                 	<th>Culture</th>
                 {%endif%}
                 {% if temp_saved %}
-                	<th>Temperature</th>
+                	<th>Temperature (°F)</th>
                 {%endif%}
                 {% if rainfall_saved %}
-                	<th>Rainfall</th>
+                	<th>Rainy/Dry Season</th>
                 {%endif%}
             </tr>
         </thead>
@@ -498,7 +499,7 @@ $(document).ready(function(){
                 	<td>{{country.temp_for_month|floatformat:2}}</td>
                 {%endif%}
                 {% if rainfall_saved %}
-                	<td>{{country.rainy_dry_for_month}}</td>
+                	<td><i class="fa fa-{{country.rainy_dry_for_month|iconclass}}"></i> {{country.rainy_dry_for_month}}</td>
                 {%endif%}
             </tr>
             {% endfor %}

@@ -1,6 +1,12 @@
 from django.template import Library
 
 register = Library()
+@register.filter(name="iconclass")
+def iconclass(wetdry):
+  if wetdry == "Rainy":
+    return "umbrella"
+  elif wetdry == "Dry":
+    return "sun-o"
 
 @register.filter
 def get_range( value ):

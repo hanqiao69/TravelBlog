@@ -307,6 +307,5 @@ def update_image(request):
             handle_uplaoded_file(request.user, request.FILES['image_file'])
     return calupdate(request)
 
-
 def compile_results(string1):
     print string1
