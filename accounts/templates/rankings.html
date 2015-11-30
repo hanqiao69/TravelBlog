@@ -445,6 +445,12 @@ $(document).ready(function(){
                 {% if ranking11 > 0 %}
                 	<th>Culture</th>
                 {%endif%}
+                {% if temp_saved %}
+                	<th>Temperature</th>
+                {%endif%}
+                {% if rainfall_saved %}
+                	<th>Rainfall</th>
+                {%endif%}
             </tr>
         </thead>
         <tbody>
@@ -487,6 +493,12 @@ $(document).ready(function(){
                 {%endif%}
                 {% if ranking11 > 0 %}
                 	<td>{{country.culture|floatformat:2}}</td>
+                {%endif%}
+                {% if temp_saved %}
+                	<td>{{country.temp_for_month|floatformat:2}}</td>
+                {%endif%}
+                {% if rainfall_saved %}
+                	<td>{{country.rainfall_for_month}}</td>
                 {%endif%}
             </tr>
             {% endfor %}

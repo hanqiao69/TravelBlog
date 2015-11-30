@@ -1,5 +1,6 @@
 import os
 import operator
+import json
 
 from django import forms
 from django.shortcuts import redirect, render_to_response
@@ -136,13 +137,49 @@ def ranking(request):
           ranking_final = sum(multiplied)
           dict_country["ranking"] = ranking_final
           #print dict_country
-          countries_display.append(dict_country)
+
+          #REMOVE BASED ON RAINFALL FIELD
+          exclude = False
+          if request.POST.get("temp"):
+            temperature = json.loads(dict_country["temperature"])
+            temp_for_month = temperature[int(request.POST.get("month"))]
+            dict_country["temp_for_month"] = temp_for_month
+            if temp_for_month == "":
+              continue
+            else:
+              if request.POST.get("temp") == "below":
+                below_temp = request.POST.get("below_temp")
+                if float(temp_for_month) > float(below_temp):
+                  exclude = True
+              if request.POST.get("temp") == "above":
+                above_temp = request.POST.get("above_temp")
+                if float(temp_for_month) < float(above_temp):
+                  exclude = True
+              if request.POST.get("temp") == "between":
+                low_temp = request.POST.get("between_low_temp")
+                high_temp = request.POST.get("between_high_temp")
+                if float(temp_for_month) < float(low_temp) or float(temp_for_month) > float(high_temp):
+                  exclude = True
+          if request.POST.get("rainfall"):
+            rainy_dry = json.loads(dict_country["rainy_dry"])
+            rainy_dry_for_month = rainy_dry[int(request.POST.get("month"))] 
+            dict_country["rainfall_for_month"] = rainy_dry_for_month
+            print rainy_dry_for_month
+            if request.POST.get("rainfall") == "dry" or request.POST.get("rainfall") == "wet":
+              if rainy_dry_for_month != "" and rainy_dry_for_month != capitalize_rain(request.POST.get("rainfall")):
+                exclude = True
+          if exclude != True:
+            countries_display.append(dict_country)
         countries_display.sort(key=operator.itemgetter('ranking'), reverse=True)
         data["countries"] = countries_display
         #print countries_display
     return render_to_response('rankings.html', data, RequestContext(request))
 
-
+def capitalize_rain(rainfall):
+  if rainfall == "dry":
+    return "Dry"
+  if rainfall == "wet":
+    return "Rainy"
 @login_required(login_url='/accounts/login')
 def dash(request):
     return render_to_response('dashcontent.html', RequestContext(request))
