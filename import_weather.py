@@ -16,7 +16,7 @@ def populate():
             if index > 0:
                 if row[index] != "" and row[index] != "Rainy" and row[index] != "Dry":
                     row[index] = float(row[index])  
-            if index >1 and index < 14:
+            if index >=1 and index < 14:
                 list_temp.append(row[index])
             if index >= 14 and index < 27:
                 list_rainfall.append(row[index])

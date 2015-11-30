@@ -144,6 +144,8 @@ def ranking(request):
             temperature = json.loads(dict_country["temperature"])
             temp_for_month = temperature[int(request.POST.get("month"))]
             dict_country["temp_for_month"] = temp_for_month
+            print temp_for_month
+            print dict_country["name"]
             if temp_for_month == "":
               pass
             else:
