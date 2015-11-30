@@ -90,7 +90,29 @@ def ranking(request):
     preferences = []
     for i in range(0, 12):
             data["ranking"+str(i)] = 0
+            data["selected_7"] = "selected"
     if request.POST.get('mybtn'):
+        print request.POST.get("month")
+        print request.POST.get("temp")
+        print request.POST.get("rainfall")
+        print request.POST
+        if request.POST.get("month"):
+          month_gotten = int(request.POST.get("month"))
+          for i in range(0, 12):
+            if i == month_gotten:
+              data["selected_"+str(i)] = "selected"
+            else:
+              data["selected_"+str(i)] = ""
+
+        if request.POST.get("temp"):
+          data[request.POST.get("temp")+"_checked"] = "checked"
+          data["temp_saved"] = True
+        if request.POST.get("rainfall"):
+          data[request.POST.get("rainfall")+"_checked"] = "checked"
+          data["rainfall_saved"] = True
+        saved_data = ["above_temp", "below_temp", "between_low_temp", "between_high_temp"]
+        for saved_attribute in saved_data:
+          data[saved_attribute+"_saved"] = request.POST.get(saved_attribute)
         sum_total = 0
         for i in range(0, 12):
             print request.POST.get(str(i))
@@ -113,11 +135,11 @@ def ranking(request):
           multiplied = [float(a)*b for a,b in zip(preferences,rank_list)]
           ranking_final = sum(multiplied)
           dict_country["ranking"] = ranking_final
-          print dict_country
+          #print dict_country
           countries_display.append(dict_country)
         countries_display.sort(key=operator.itemgetter('ranking'), reverse=True)
         data["countries"] = countries_display
-        print countries_display
+        #print countries_display
     return render_to_response('rankings.html', data, RequestContext(request))
 
 
