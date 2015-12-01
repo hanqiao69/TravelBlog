@@ -68,11 +68,11 @@ text_month = {"jan": "January",
 
 # Create your views here.
 def home(request):
-    query = CustomUser.objects.all().filter(username=request.user)
-    if len(query):
-        return redirect('/profile/update')
-    else:
-        return redirect('/currency')
+    #query = CustomUser.objects.all().filter(username=request.user)
+    #if len(query):
+    #    return redirect('/profile/update')
+    #else:
+  return redirect('/ranking')
         #return render_to_response("index.html", RequestContext(request))
 def climate(request, month):
     precip_src = precip_url[month]
