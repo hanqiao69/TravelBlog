@@ -1,8 +1,9 @@
-{%extends 'basenew.html' %}
+{%extends 'baseempty.html' %}
 {% load staticfiles %}
 {%block content %}
             <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
             <script src="{%static "js/chart.js"%}"></script>
+        <main>
             <section id="image-background-1" class="light-bg img-bg-soft img-bg" style="background-image: url({%static "images/art/image-background01.jpg"%});">
                 <div class="container">
                     <div class="row">
@@ -27,7 +28,7 @@
                                             </div>
                                             </div>
 
-
+</main>
 <script>
 window.onload=function() {
         var ctx = document.getElementById("metrics-chart").getContext("2d");
