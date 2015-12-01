@@ -46,7 +46,7 @@ Find me my happy place...
 			<tr><td><input type="button" class="btn btn-gray" value="Natural Life" id="nature"></td><td width="10%"></td>
 			<td><input type="button" class="btn btn-gray" value="Cultural Resources" id="culture"></td></tr>
 			<tr><td><input type="button" class="btn btn-gray" value="Temperature" id="temperature"></td><td width="10%"></td>
-			<td><input type="button" class="btn btn-gray" value="Wet/Dry Season" id="rainfall"></td></tr>
+			<td><input type="button" class="btn btn-gray" value="Rainy/Dry Season" id="rainfall"></td></tr>
 </table>
 
 
@@ -370,16 +370,16 @@ $(document).ready(function(){
 			</td></tr></table>
             <hr><table width="100%">
 		<tr id="rainfall-row" style="display:none;">
-			<td width="30%"><label>Wet/Dry Season</label></td>
+			<td width="30%"><label>Rainy/Dry Season</label></td>
 			<td>
 <ul class="temperature">
 <li style="float:left">
     <input type="radio" id="wet" name="rainfall" value="wet" {{wet_checked}}/>
-    <label for="wet">Wet </label>
+    <label for="wet"><i class="fa fa-umbrella"></i> Rainy </label>
 </li>
 <li style="float:left">
     <input type="radio" id="dry" name="rainfall" value="dry" {{dry_checked}}/>
-    <label for="dry">Dry </label>
+    <label for="dry"><i class="fa fa-sun-o"></i> Dry </label>
 </li>
 <li style="float:left">
     <input type="radio" id="either" name="rainfall" value="either" {{either_checked}}/>
