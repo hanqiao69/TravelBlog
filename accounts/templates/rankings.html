@@ -350,17 +350,17 @@ $(document).ready(function(){
 <li>
     <input type="radio" id="below" name="temp" value="below" {{below_checked}}/>
     <label for="below">Below </label>
-    <input type="text" style="width:30%; margin-top:11px;" id="below_temp" name="below_temp" value="{{below_temp_saved}}"/>
+    <input type="text" style="width:30%; margin-top:11px;" id="below_temp" name="below_temp" value="{{below_temp_saved}}" onfocus="javascript:document.getElementById('below').checked = true;"/>
 </li>
 <li>
     <input type="radio" id="above" name="temp" value="above" {{above_checked}}/>
     <label for="above">Above </label>
-    <input type="text" style="width:30%; margin-top:11px;" id="above_temp" name="above_temp" value="{{above_temp_saved}}"/>
+    <input type="text" style="width:30%; margin-top:11px;" id="above_temp" name="above_temp" value="{{above_temp_saved}}" onfocus="javascript:document.getElementById('above').checked = true;"/>
 </li>
 <li>
     <input type="radio" id="between" name="temp" value="between" {{between_checked}}/>
     <label for="between">Between </label>
-    <input type="text" style="width:30%; margin-top:11px;" id="between_low_temp" name="between_low_temp" value="{{between_low_temp_saved}}" /> and
+    <input type="text" style="width:30%; margin-top:11px;" id="between_low_temp" name="between_low_temp" value="{{between_low_temp_saved}}" onfocus="javascript:document.getElementById('between').checked = true;"/> and
     <input type="text" style="width:30%; margin-top:11px;" id="between_high_temp" name="between_high_temp" value="{{between_high_temp_saved}}"/>
 </li>
 </ul>
