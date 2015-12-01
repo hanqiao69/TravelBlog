@@ -86,6 +86,23 @@ def currency(request):
     map_five_chart = "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=489787441&amp;format=interactive"
     data = {"chart":chart, "map_five_chart":map_five_chart}
     return render_to_response('currency.html', data, RequestContext(request))
+def country(request, country_code):
+    country = Country.objects.get(code=country_code)
+    dict_country = model_to_dict(country)
+    data = {"country": dict_country}
+    print data
+    return render_to_response('country.html', data, RequestContext(request))
+def country_with_month(request, country_code, month):
+    country = Country.objects.get(code=country_code)
+    dict_country = model_to_dict(country)
+    dict_metric = {"name":"Safety", "score":5.0}
+    list_metrics = []
+    order = ["safety", "price", "nature", "culture", "environment", "air", "ground", "tourist", "health", "internet", "travel", "openness", ]
+    name = ["Safety", "Price", "Natural Life", "Cultural Resources", "Env. Sustainability", "Air Infrastructure", "Ground Infrastructure", "Tourism Infrastructure", "Healthcare", "Internet", "Gov't Focus on Tourism", "Int'l Openness"]
+    for i, criteria in enumerate(order):
+      list_metrics.append({"name": name[i], "score":float(dict_country[criteria])})
+    data = {"country": dict_country, "month": month, "metrics": list_metrics}
+    return render_to_response('country.html', data, RequestContext(request))
 def ranking(request):
     data = {}
     preferences = []

@@ -28,6 +28,8 @@ urlpatterns = patterns(
     url(r'^dash/$', dash),
     url(r'^currency/$', currency),
     url(r'^climate/(?P<month>[\w.@+-]+)/$', climate),
+    url(r'^countries/(?P<country_code>[\w.@+-]+)/$', country),
+    url(r'^countries/(?P<country_code>[\w.@+-]+)/(?P<month>[\w.@+-]+)/$', country_with_month),
     url(r'^ranking/$', ranking),
     
 )

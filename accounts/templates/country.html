@@ -1,0 +1,55 @@
+{%extends 'basenew.html' %}
+{% load staticfiles %}
+{%block content %}
+
+
+            <link href="{%static "css/jquery.circliful.css"%}" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+            <script src="{%static "js/jquery.circliful.min.js"%}"></script>
+            <section id="image-background-1" class="light-bg img-bg-soft img-bg" style="background-image: url({%static "images/art/image-background01.jpg"%});">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-9 inner center-block text-center">
+                            <header>
+                                <h1>{{country.name}}</h1>
+                                
+                            </header>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+            </section>
+                <div class="container inner-bottom">
+                    <div class="row">
+                        <div class="col-sm-12 portfolio">
+                                                <ul class="items col-4 gap">
+                                                    {% for metric in metrics %}
+                                                    <li class="item thumb">
+                                                            <figure>
+                                                                <div style="height:200px">
+                                                                <div class="icon-overlay icn-link">
+                                                                     <div name="myStat" data-dimension="200" data-text="{{metric.score|floatformat:2}}" data-info="{{metric.name}}" data-width="30" data-fontsize="25" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd" data-total="7" data-part="{{metric.score}}" data-icon="long-arrow-up" data-icon-size="28" data-icon-color="#fff"></div>
+                                                                     
+                                                                </div><!-- /.icon-overlay -->
+                                                            </div>
+                                                            <!-- <figcaption class="bordered no-top-border">
+                                                                <div class="info">
+                                                                    <h4><a href="portfolio-post.html">{{metric.name}}</a></h4>
+                                                                    <p>{{metric.score}}</p>
+                                                                </div>
+                                                            </figcaption>-->
+                                                            </figure>
+                                                    </li><!-- /.item -->
+                                                    {%endfor%}
+                                                </ul><!-- /.items -->
+                                                
+                                            </div>
+                                            </div>
+                                            </div>
+
+
+<script>
+window.onload=function() {
+        $('div[name^=myStat]').circliful();
+    };
+</script>
+{%endblock%}
