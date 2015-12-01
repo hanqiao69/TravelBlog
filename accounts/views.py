@@ -105,12 +105,16 @@ def country(request, country_code):
     metrics_2 = metrics_2[:-1]+"]}"
     temperature_list = json.loads(dict_country["temperature"])
     for i, temp in enumerate(temperature_list):
-      if i < 12:
-        temperature += str(round(float(temp), 2))+","
+      if i < 12 and temp!="":
+          temperature += str(round(float(temp), 2))+","
+      else:
+        temperature += " "
     rainfall_list = json.loads(dict_country["rainfall"])
     for i, rain in enumerate(rainfall_list):
-      if i < 12:
+      if i < 12 and temp!="":
         rainfall += str(round(float(rain), 2))+","
+      else:
+        rainfall += " "
     temperature = temperature[:-1]+"]}"
     rainfall = rainfall[:-1]+"]}"
     data = {"country": dict_country, "metrics": string, "metrics_2": metrics_2, "labels": name, "temperature": temperature, "rainfall": rainfall}
