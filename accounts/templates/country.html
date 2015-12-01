@@ -1,11 +1,8 @@
 {%extends 'basenew.html' %}
 {% load staticfiles %}
 {%block content %}
-
-
-            <link href="{%static "css/jquery.circliful.css"%}" rel="stylesheet">
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-            <script src="{%static "js/jquery.circliful.min.js"%}"></script>
+            <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+            <script src="{%static "js/chart.js"%}"></script>
             <section id="image-background-1" class="light-bg img-bg-soft img-bg" style="background-image: url({%static "images/art/image-background01.jpg"%});">
                 <div class="container">
                     <div class="row">
@@ -18,30 +15,14 @@
                     </div><!-- /.row -->
                 </div><!-- /.container -->
             </section>
-                <div class="container inner-bottom">
+                <div class="container">
                     <div class="row">
                         <div class="col-sm-12 portfolio">
-                                                <ul class="items col-4 gap">
-                                                    {% for metric in metrics %}
-                                                    <li class="item thumb">
-                                                            <figure>
-                                                                <div style="height:200px">
-                                                                <div class="icon-overlay icn-link">
-                                                                     <div name="myStat" data-dimension="200" data-text="{{metric.score|floatformat:2}}" data-info="{{metric.name}}" data-width="30" data-fontsize="25" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd" data-total="7" data-part="{{metric.score}}" data-icon="long-arrow-up" data-icon-size="28" data-icon-color="#fff"></div>
-                                                                     
-                                                                </div><!-- /.icon-overlay -->
-                                                            </div>
-                                                            <!-- <figcaption class="bordered no-top-border">
-                                                                <div class="info">
-                                                                    <h4><a href="portfolio-post.html">{{metric.name}}</a></h4>
-                                                                    <p>{{metric.score}}</p>
-                                                                </div>
-                                                            </figcaption>-->
-                                                            </figure>
-                                                    </li><!-- /.item -->
-                                                    {%endfor%}
-                                                </ul><!-- /.items -->
-                                                
+                            <canvas id="metrics-chart" width="400" height="400" style="display:block; margin:auto;"></canvas>
+                            <canvas id="bar-chart" width="800" height="400" style="display:block; margin:auto;"></canvas>
+                            <canvas id="temp-rainfall-chart" width="800" height="400" style="display:block; margin:auto;"></canvas>
+                            <div id="js-legend" class="chart-legend"></div>
+
                                             </div>
                                             </div>
                                             </div>
@@ -49,7 +30,18 @@
 
 <script>
 window.onload=function() {
-        $('div[name^=myStat]').circliful();
+        var ctx = document.getElementById("metrics-chart").getContext("2d");
+        var data = [{{metrics|safe}}];
+        var myNewChart = new Chart(ctx).PolarArea(data);
+        $("#metrics-chart").append(myNewChart.generateLegend())
+        var ctx2 = document.getElementById("bar-chart").getContext("2d");
+        var data2 = {labels: {{labels|safe}}, datasets:[{{metrics_2|safe}}]};
+        var myNewChart2 = new Chart(ctx2).Bar(data2);
+        var ctx3 = document.getElementById("temp-rainfall-chart").getContext("2d");
+        var data3 = {labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], datasets:[{{temperature|safe}}, {{rainfall|safe}}]};
+        var myNewChart3 = new Chart(ctx3).Line(data3);
+        document.getElementById('js-legend').innerHTML = myNewChart3.generateLegend();
+        Chart.defaults.global.responsive = true;
     };
 </script>
 {%endblock%}

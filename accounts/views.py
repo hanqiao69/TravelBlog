@@ -89,19 +89,31 @@ def currency(request):
 def country(request, country_code):
     country = Country.objects.get(code=country_code)
     dict_country = model_to_dict(country)
-    data = {"country": dict_country}
-    print data
-    return render_to_response('country.html', data, RequestContext(request))
-def country_with_month(request, country_code, month):
-    country = Country.objects.get(code=country_code)
-    dict_country = model_to_dict(country)
     dict_metric = {"name":"Safety", "score":5.0}
     list_metrics = []
     order = ["safety", "price", "nature", "culture", "environment", "air", "ground", "tourist", "health", "internet", "travel", "openness", ]
     name = ["Safety", "Price", "Natural Life", "Cultural Resources", "Env. Sustainability", "Air Infrastructure", "Ground Infrastructure", "Tourism Infrastructure", "Healthcare", "Internet", "Gov't Focus on Tourism", "Int'l Openness"]
+    colors = ["#c12323", "#d3d42a", "#6cd443", "#2ca4a7", "#911fc5", "#f2798f", "#d977bf", "#263f73", "#3c5fa6", "#85f2f2", "#dddddd", "#449edd"]
+    string = ""
+    metrics_2 = '{label:"World Economic Forum Rankings", fillColor: "rgba(151,187,205,0.5)", strokeColor: "rgba(151,187,205,0.8)", highlightFill: "rgba(151,187,205,0.75)", highlightStroke: "rgba(151,187,205,1)", data: ['
+    temperature = '{label:"Temperature (F)", fillColor: "rgba(220,220,220,0.2)", strokeColor: "rgba(220,220,220,1)", pointColor: "rgba(220,220,220,1)", pointStrokeColor: "#fff", pointHighlightFill: "#fff", pointHighlightStroke: "rgba(220,220,220,1)", data: ['
+    rainfall = '{label:"Rainfall (mm)", fillColor: "rgba(151,187,205,0.2)", strokeColor: "rgba(151,187,205,1)", pointColor: "rgba(151,187,205,1)", pointStrokeColor: "#fff", pointHighlightFill: "#fff", pointHighlightStroke: "rgba(151,187,205,1)", data: ['
+
     for i, criteria in enumerate(order):
-      list_metrics.append({"name": name[i], "score":float(dict_country[criteria])})
-    data = {"country": dict_country, "month": month, "metrics": list_metrics}
+      string += '{value:'+str(round(float(dict_country[criteria]), 2))+', color: "'+colors[i]+'", label: "'+name[i]+'"},'
+      metrics_2 += str(round(float(dict_country[criteria]), 2))+","
+    metrics_2 = metrics_2[:-1]+"]}"
+    temperature_list = json.loads(dict_country["temperature"])
+    for i, temp in enumerate(temperature_list):
+      if i < 12:
+        temperature += str(round(float(temp), 2))+","
+    rainfall_list = json.loads(dict_country["rainfall"])
+    for i, rain in enumerate(rainfall_list):
+      if i < 12:
+        rainfall += str(round(float(rain), 2))+","
+    temperature = temperature[:-1]+"]}"
+    rainfall = rainfall[:-1]+"]}"
+    data = {"country": dict_country, "metrics": string, "metrics_2": metrics_2, "labels": name, "temperature": temperature, "rainfall": rainfall}
     return render_to_response('country.html', data, RequestContext(request))
 def ranking(request):
     data = {}
