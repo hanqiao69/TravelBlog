@@ -16,18 +16,8 @@ My name is {{user}}
     {{ form.image_file.errors }}
     {{ form.image_file }}
   </p>
-  <p><input type="submit" value="Upload" /></p>
+  <p><input type="submit" class="btn" value="Upload" /></p>
 </form>
 
 <div style="margin:50px"></div>
-<form action="#" method="post">
-  {% csrf_token %}
-<div style="margin:50px"></div>
- <input type="submit" class="btn" value="Update Base Calendar" name="mybtn">
- <div style="margin:50px"></div>
-</form>
-<form action="#" method="post">
-  {% csrf_token %}
-   <input type="submit" class="btn" value="Generate Group" name="gen_group">
- </form>
     {%endblock%}

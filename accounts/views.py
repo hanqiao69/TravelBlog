@@ -213,38 +213,6 @@ def capitalize_rain(rainfall):
     return "Dry"
   if rainfall == "wet":
     return "Rainy"
-@login_required(login_url='/accounts/login')
-def dash(request):
-    return render_to_response('dashcontent.html', RequestContext(request))
-
-@login_required(login_url='/accounts/login')
-def group(request, group_id):
-    # user = CustomUser.objects.get(username=request.user)
-    query = Group.objects.all().filter(id=group_id)
-    group = query[0]
-    users = group.members.all()
-    members = []
-    for user in users:
-        user_profile = user.get_user_profile()
-        members.append({"username": user.username,
-                        "profile_image": user_profile.profile_image_url()})
-    data = {'group': group, 'members': members}
-    return render_to_response("group.html", data, RequestContext(request))
-
-
-def brand(request):
-    return render_to_response("brand.html", RequestContext(request))
-
-
-@login_required(login_url='/accounts/login')
-def campaigns(request):
-    user = CustomUser.objects.get(username=request.user)
-    user_profile = user.get_user_profile()
-    groups = Group.objects.all().filter(admin=request.user)
-    data = {'profile_image': user_profile.profile_image_url(),
-            'prof': user_profile, 'groups': groups, 'username': user}
-    return render_to_response("groups.html", data, RequestContext(request))
-
 
 @login_required(login_url='/accounts/login')
 def profile(request, user_id):
@@ -284,24 +252,7 @@ class UploadFileForm(forms.Form):
 
 
 @login_required(login_url='/accounts/login')
-def calupdate(request):
-    if request.POST.get('mybtn'):
-        string1 = ""
-        for i in range(1, 337):
-            print request.POST.get(str(i))
-            if request.POST.get(str(i)) == 'true':
-                string1 += "1"
-            else:
-                string1 += "0"
-        user = CustomUser.objects.get(username=request.user)
-        user_profile = user.get_user_profile()
-        user_profile.save()
-    if request.POST.get('gen_group'):
-        new_group = Group.objects.create()
-        new_group.admin.add(request.user)
-        new_group.members.add(request.user)
-        new_group.save()
-        return redirect('/group/' + str(new_group.id))
+def update(request):
     user = CustomUser.objects.get(username=request.user)
     print user
     user_profile = user.get_user_profile()
@@ -311,19 +262,19 @@ def calupdate(request):
             'profile': user_profile,
             'form': form}
 
-    return render_to_response('calupdate.html', data, RequestContext(request))
+    return render_to_response('update.html', data, RequestContext(request))
 
 
-def handle_uplaoded_file(user, file_):
+def handle_uploaded_file(user, file_):
     user_name = str(user)
-    images_dir = 'static/user_images/'
+    images_dir = 'brandplug/static/user_images/'
     if not os.path.exists(images_dir):
         os.makedirs(images_dir)
     image_name = 'user_images/' + user_name
     user_profile = CustomUser.objects.get(username=user).get_user_profile()
     user_profile.profile_image = image_name
     user_profile.save()
-    image_path = 'static/' + image_name
+    image_path = 'brandplug/static/' + image_name
     print 'let\'s write to', image_path
     with open(image_path, 'wb+') as destination:
         for chunk in file_.chunks():
@@ -335,8 +286,6 @@ def update_image(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            handle_uplaoded_file(request.user, request.FILES['image_file'])
+            handle_uploaded_file(request.user, request.FILES['image_file'])
     return calupdate(request)
 
-def compile_results(string1):
-    print string1
