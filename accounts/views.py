@@ -17,42 +17,6 @@ from accounts.models import CustomUser, Group, Country
 from django.contrib.auth.decorators import login_required
 # from allauth.socialaccount.models import SocialToken
 # from allauth.socialaccount.models import SocialAccount
-precip_url = {"jan": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883644005&amp;format=interactive",
-       "feb": "",
-       "mar": "",
-       "apr": "",
-       "may": "",
-       "jun": "",
-       "jul": "",
-       "aug": "",
-       "sep": "",
-       "oct": "",
-       "nov": "",
-       "dec": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883644005&amp;format=interactive"}
-precip_chart_url = {"jan": "",
-       "feb": "",
-       "mar": "",
-       "apr": "",
-       "may": "",
-       "jun": "",
-       "jul": "",
-       "aug": "",
-       "sep": "",
-       "oct": "",
-       "nov": "",
-       "dec": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=2014329076&amp;format=interactive"}
-temp_url = {"jan": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883644005&amp;format=interactive",
-       "feb": "",
-       "mar": "",
-       "apr": "",
-       "may": "",
-       "jun": "",
-       "jul": "",
-       "aug": "",
-       "sep": "",
-       "oct": "",
-       "nov": "",
-       "dec": "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1670414277&amp;format=interactive"}
 text_month = {"jan": "January",
        "feb": "February",
        "mar": "March",
@@ -65,7 +29,18 @@ text_month = {"jan": "January",
        "oct": "October",
        "nov": "November",
        "dec": "December"}
-
+number_month = {"jan": 0,
+       "feb": 1,
+       "mar": 2,
+       "apr": 3,
+       "may": 4,
+       "jun": 5,
+       "jul": 6,
+       "aug": 7,
+       "sep": 8,
+       "oct": 9,
+       "nov": 10,
+       "dec": 11}
 # Create your views here.
 def home(request):
     #query = CustomUser.objects.all().filter(username=request.user)
@@ -75,11 +50,31 @@ def home(request):
   return redirect('/ranking')
         #return render_to_response("index.html", RequestContext(request))
 def climate(request, month):
-    precip_src = precip_url[month]
-    temp_src = temp_url[month]
+    temperature_data = "[['Country', 'Temperature (F)'],"
+    rainfall_data = "[['Country', 'Rainfall (mm)'],"
+    query_countries = Country.objects.all()
+    countries = []
+    for country in query_countries:
+      dict_country = model_to_dict(country)
+      temperature = json.loads(dict_country["temperature"])
+      if temperature:
+        temp_for_month = temperature[number_month[month]]
+        dict_country["temp_for_month"] = temp_for_month
+        if temp_for_month != "":
+          temperature_data += '["'+dict_country["name"]+'",'+str(round(temp_for_month,2))+'],'
+      rainfall = json.loads(dict_country["rainfall"])
+      rainy_dry = json.loads(dict_country["rainy_dry"])
+      if rainfall:
+        rainfall_for_month = rainfall[number_month[month]]
+        dict_country["rainfall_for_month"] = rainfall_for_month
+        dict_country["rainy_dry_for_month"] = rainy_dry[number_month[month]]
+        if rainfall_for_month != "":
+          rainfall_data += '["'+dict_country["name"]+'",'+str(round(rainfall_for_month,2))+'],'
+          countries.append(dict_country)
+    temperature_data = temperature_data[:-1]+"]"
+    rainfall_data = rainfall_data[:-1]+"]"
     text = text_month[month]
-    precip_chart_src = precip_chart_url[month]
-    data = {"text_mon":text, "precip": precip_src, "precip_chart": precip_chart_src, "temp": temp_src}
+    data = {"text_mon":text, "rainfall_data":rainfall_data, "countries": countries, "temperature_data": temperature_data}
     return render_to_response('climate.html', data, RequestContext(request))
 def currency(request):
     chart = "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883251703&amp;format=interactive"
@@ -162,7 +157,10 @@ def ranking(request):
         countries_display = []
         order = ["safety", "health", "internet", "travel", "openness", "price", "environment", "air", "ground", "tourist", "nature", "culture"]
         for country in query_countries:
+          #temporary to fix incomplete datasets
           dict_country = model_to_dict(country)
+          if dict_country["safety"] == None:
+            continue
           rank_list = []
           for criteria in order:
             rank_list.append(dict_country[criteria])

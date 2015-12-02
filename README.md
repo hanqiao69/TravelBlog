@@ -16,3 +16,12 @@ Follow prompts to create superuser and record the username and password
 	python manage.py runserver
 
 
+Import instructions:
+
+python manage.py shell
+from import_countries import *
+populate()
+from import_weather import *
+populate()
+from import_weather_complete import *
+populate()
