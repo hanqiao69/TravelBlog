@@ -119,7 +119,7 @@ def ranking(request):
     preferences = []
     for i in range(0, 12):
             data["ranking"+str(i)] = 0
-            data["selected_7"] = "selected"
+            data["selected_11"] = "selected"
     if request.POST.get('mybtn'):
         print request.POST.get("month")
         print request.POST.get("temp")

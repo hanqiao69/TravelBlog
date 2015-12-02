@@ -321,8 +321,8 @@ $(document).ready(function(){
  <tr id="culture-row" style="display:none;"><td width="40%"><label>Cultural Resources</label></td><td>
  <input type="range" name="11" id="points" value="{{ranking11}}" min="0" max="7"></td></tr>
 </table>
-<hr>
-
+</div>
+<div style="margin:50px; border-top: 1pt solid #d3d3d3; padding-top: 40px; padding-bottom:0px; border-spacing:0 5px;">
 <table width="100%">
 		<tr id="month-row">
 			<td width="30%"><label>I will be traveling in: </label></td>
@@ -342,8 +342,11 @@ $(document).ready(function(){
 				  <option {{selected_11}} value="11">December</option>
 				</select></td>
 		</tr></table>
-        <hr><table width="100%">
-		<tr id="temperature-row" style="display:none;">
+
+</div>
+<div id="temperature-row" style="display:none; border-top: 1pt solid #d3d3d3; padding-top: 40px; padding-bottom:0px; border-spacing:0 5px; margin:50px">
+        <table width="100%">
+		<tr>
 			<td width="30%"><label>I want the temperature to be (°F):</label></td>
 			<td>
 <ul class="temperature">
@@ -368,8 +371,10 @@ $(document).ready(function(){
 
 
 			</td></tr></table>
-            <hr><table width="100%">
-		<tr id="rainfall-row" style="display:none;">
+</div>
+<div id="rainfall-row" style="display:none; border-top: 1pt solid #d3d3d3; padding-top: 40px; padding-bottom:0px; border-spacing:0 5px; margin:50px">
+            <table width="100%">
+		<tr>
 			<td width="30%"><label>Rainy/Dry Season</label></td>
 			<td>
 <ul class="temperature">
