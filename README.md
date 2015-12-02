@@ -25,3 +25,5 @@ from import_weather import *
 populate()
 from import_weather_complete import *
 populate()
+from import_fixexd_names import *
+populate()
