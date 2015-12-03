@@ -2,7 +2,7 @@ import os
 import operator
 import json
 import ast
-
+from django.core.exceptions import ObjectDoesNotExist
 from django import forms
 from django.shortcuts import redirect, render_to_response
 # from django.template.loader import get_template
@@ -83,7 +83,11 @@ def currency(request):
     data = {"chart":chart, "map_five_chart":map_five_chart}
     return render_to_response('currency.html', data, RequestContext(request))
 def country(request, country_code):
-    country = Country.objects.get(code=country_code)
+    country = None
+    try:
+      country = Country.objects.get(code=country_code)
+    except ObjectDoesNotExist:
+        return redirect('/ranking')
     dict_country = model_to_dict(country)
     dict_metric = {"name":"Safety", "score":5.0}
     list_metrics = []
