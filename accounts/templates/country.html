@@ -18,6 +18,7 @@
     </section>
     <div class ="row"><br/></div>
     <div class="container">
+        {% if metrics %}
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -30,6 +31,8 @@
                 </div>
             </div>
         </div>
+        {%endif%}
+        {%if metrics_2 %}
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -43,6 +46,7 @@
                 </div>
             </div>
         </div>
+        {%endif%}
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -61,6 +65,10 @@
 </main>
 <script>
 window.onload=function() {
+        var ctx3 = document.getElementById("temp-rainfall-chart").getContext("2d");
+        var data3 = {labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], datasets:[{{temperature|safe}}, {{rainfall|safe}}]};
+        var myNewChart3 = new Chart(ctx3).Line(data3);
+        document.getElementById('js-legend').innerHTML = myNewChart3.generateLegend();
         var ctx = document.getElementById("metrics-chart").getContext("2d");
         var data = [{{metrics|safe}}];
         var myNewChart = new Chart(ctx).PolarArea(data);
@@ -68,10 +76,6 @@ window.onload=function() {
         var ctx2 = document.getElementById("bar-chart").getContext("2d");
         var data2 = {labels: {{labels|safe}}, datasets:[{{metrics_2|safe}}]};
         var myNewChart2 = new Chart(ctx2).Bar(data2);
-        var ctx3 = document.getElementById("temp-rainfall-chart").getContext("2d");
-        var data3 = {labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], datasets:[{{temperature|safe}}, {{rainfall|safe}}]};
-        var myNewChart3 = new Chart(ctx3).Line(data3);
-        document.getElementById('js-legend').innerHTML = myNewChart3.generateLegend();
         Chart.defaults.global.responsive = true;
     };
 </script>

@@ -94,11 +94,14 @@ def country(request, country_code):
     metrics_2 = '{label:"World Economic Forum Rankings", fillColor: "rgba(151,187,205,0.5)", strokeColor: "rgba(151,187,205,0.8)", highlightFill: "rgba(151,187,205,0.75)", highlightStroke: "rgba(151,187,205,1)", data: ['
     temperature = '{label:"Temperature (F)", fillColor: "rgba(220,220,220,0.2)", strokeColor: "rgba(220,220,220,1)", pointColor: "rgba(220,220,220,1)", pointStrokeColor: "#fff", pointHighlightFill: "#fff", pointHighlightStroke: "rgba(220,220,220,1)", data: ['
     rainfall = '{label:"Rainfall (mm)", fillColor: "rgba(151,187,205,0.2)", strokeColor: "rgba(151,187,205,1)", pointColor: "rgba(151,187,205,1)", pointStrokeColor: "#fff", pointHighlightFill: "#fff", pointHighlightStroke: "rgba(151,187,205,1)", data: ['
-
-    for i, criteria in enumerate(order):
-      string += '{value:'+str(round(float(dict_country[criteria]), 2))+', color: "'+colors[i]+'", label: "'+name[i]+'"},'
-      metrics_2 += str(round(float(dict_country[criteria]), 2))+","
-    metrics_2 = metrics_2[:-1]+"]}"
+    if dict_country["safety"] != None:
+      for i, criteria in enumerate(order):
+        string += '{value:'+str(round(float(dict_country[criteria]), 2))+', color: "'+colors[i]+'", label: "'+name[i]+'"},'
+        metrics_2 += str(round(float(dict_country[criteria]), 2))+","
+      metrics_2 = metrics_2[:-1] + "]}"
+    else:
+      string = None
+      metrics_2 = None
     temperature_list = json.loads(dict_country["temperature"])
     for i, temp in enumerate(temperature_list):
       if i < 12 and temp!="":
