@@ -52,7 +52,7 @@ class CustomUser(AbstractUser):
         print(self)
         print(self.corporate)
         if(self.corporate is False):
-            return InfluencerProfile.objects.get(user=self)
+            return NormalUserProfile.objects.get(user=self)
         else:
             return CorporateProfile.objects.get(user=self)
 
@@ -66,7 +66,7 @@ class UserProfile(models.Model):
         abstract = True
 
 
-class InfluencerProfile(UserProfile):
+class NormalUserProfile(UserProfile):
     username = models.CharField(max_length=500)
     profile_image = models.TextField(null=True, blank=True)
     provider = models.TextField(verbose_name='provider',null=True, blank=True)
@@ -76,6 +76,7 @@ class InfluencerProfile(UserProfile):
     followers = models.IntegerField(null=True, blank=True)
     numfollow = models.IntegerField(null=True, blank=True)
     instagramid = models.TextField(null=True, blank=True)
+    search_cache = models.TextField(null=True, blank=True)
 
     def profile_image_url(self):
         return self.profile_image
@@ -111,26 +112,8 @@ class CorporateProfile(UserProfile):
     def __unicode__(self):
         return self.company
 
-
-
-class WeekCalendar(models.Model):
-    start_date = models.DateField(null=True, blank=True)
-    availability = models.TextField(null=True, blank=True)
-    user = models.ManyToManyField(CustomUser, null=True, blank=True,
-                                  related_name='owner')
-
-    def user_names(self):
-        return ', '.join(
-            [UserProfile.get(user=a).username for a in self.user.all()])
-
-    def __unicode__(self):
-        return self._id
-
-
 class Group(models.Model):
     jointcal = models.TextField(null=True, blank=True)
-    weeklycals = models.ManyToManyField(WeekCalendar, null=True, blank=True,
-                                        related_name='groupcals')
     admin = models.ManyToManyField(CustomUser, null=True, blank=True,
                                    related_name='group_admin')
     members = models.ManyToManyField(CustomUser, null=True, blank=True,
@@ -143,10 +126,6 @@ class Group(models.Model):
     def member_names(self):
         return ', '.join([a.username for a in self.members.all()])
 
-    def weekly_cals(self):
-        return ', '.join(
-            [WeekCalendar.objects.get(user=a.user).username
-             for a in self.weeklycals.all()])
     member_names.short_description = "Members"
 
     def __unicode__(self):
@@ -158,7 +137,7 @@ class Group(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         if instance.corporate is False:
-            InfluencerProfile.objects.create(user=instance)
+            NormalUserProfile.objects.create(user=instance)
 
         else:
             CorporateProfile.objects.create(user=instance)
@@ -168,7 +147,7 @@ def prepopulate_profile(sender, instance, created, **kwargs):
     if created:
         social_account = instance
         instance = instance.user
-        user_profile = InfluencerProfile.objects.get(user=instance)
+        user_profile = NormalUserProfile.objects.get(user=instance)
         uextra = social_account.extra_data
         extra = dict([(str(k), v) for k, v in uextra.items()])
         user_profile.username = extra.get('username')

@@ -1,6 +1,7 @@
 import os
 import operator
 import json
+import ast
 
 from django import forms
 from django.shortcuts import redirect, render_to_response
@@ -13,7 +14,7 @@ from django.forms.models import model_to_dict
 # from django.template import Context, Template
 # from django.core import serializers
 from accounts.models import CustomUser, Group, Country
-# import datetime
+import datetime
 from django.contrib.auth.decorators import login_required
 # from allauth.socialaccount.models import SocialToken
 # from allauth.socialaccount.models import SocialAccount
@@ -120,13 +121,19 @@ def ranking(request):
     for i in range(0, 12):
             data["ranking"+str(i)] = 0
             data["selected_11"] = "selected"
+    if request.method == 'GET':
+      if "search_query" in request.session:
+        data = ast.literal_eval(request.session["search_query"])
+        loaded_data = True
     if request.POST.get('mybtn'):
+        print request.POST
         print request.POST.get("month")
         print request.POST.get("temp")
         print request.POST.get("rainfall")
         print request.POST
         if request.POST.get("month"):
           month_gotten = int(request.POST.get("month"))
+          data["month"] = month_gotten
           for i in range(0, 12):
             if i == month_gotten:
               data["selected_"+str(i)] = "selected"
@@ -148,6 +155,26 @@ def ranking(request):
             sum_total += int(request.POST.get(str(i)))
             preferences.append(int(request.POST.get(str(i))))
             data["ranking"+str(i)] = int(request.POST.get(str(i)))
+        #save in user search cache
+        inv_month = dict(zip(number_month.values(), number_month.keys()))
+        data["short_name"] = "Travel in: " + inv_month[int(request.POST.get("month"))] + " at " + datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+        print request.user
+        if request.user.is_authenticated():
+          user = CustomUser.objects.get(username=request.user)
+          user_profile = user.get_user_profile()
+          if user_profile.search_cache:
+            existing_cache = json.loads(user_profile.search_cache)
+            if len(existing_cache) > 10:
+              existing_cache.pop()
+            existing_cache.insert(0, data)
+            user_profile.search_cache = json.dumps(existing_cache)
+            user_profile.save()
+          else:
+            search_cache = []
+            search_cache.insert(0, data)
+            user_profile.search_cache = json.dumps(search_cache)
+            user_profile.save()
+        request.session["search_query"] = str(data)
         if sum_total == 0:
           sum_total += 1
         for i in range(0, 12):
@@ -220,10 +247,9 @@ def profile(request, user_id):
     user_profile = user.get_user_profile()
 
     data = {'profile_image': user_profile.profile_image_url(),
-            'prof': user_profile}
+            'profile': user_profile}
 
     return render_to_response('profile.html', data, RequestContext(request))
-
 
 def publicprofile(request, username_user):
     user = CustomUser.objects.get(username=username_user)
@@ -242,13 +268,21 @@ def profileself(request):
     print user
     user_profile = user.get_user_profile()
 
+    search_cache = None
+    print user_profile.search_cache
+    if user_profile.search_cache:
+      search_cache = json.loads(user_profile.search_cache)
+    print search_cache
+    if request.method == 'POST':
+      request.session['search_query'] = request.POST.get("query_data")
+      return redirect('/ranking')
     data = {'profile_image': user_profile.profile_image_url(),
-            'profile': user_profile}
+            'prof': user_profile, 'search_cache': search_cache}
 
     return render_to_response('profile.html', data, RequestContext(request))
 
 class UploadFileForm(forms.Form):
-    image_file = forms.FileField(label='Select a file')
+    image_file = forms.FileField(label='Upload a new profile image')
 
 
 @login_required(login_url='/accounts/login')
@@ -256,9 +290,10 @@ def update(request):
     user = CustomUser.objects.get(username=request.user)
     print user
     user_profile = user.get_user_profile()
+    profile_image = user_profile.profile_image_url()
     print "hello"
     form = UploadFileForm()
-    data = {'profile_image': user_profile.profile_image_url(),
+    data = {'profile_image': profile_image,
             'profile': user_profile,
             'form': form}
 
@@ -287,5 +322,5 @@ def update_image(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             handle_uploaded_file(request.user, request.FILES['image_file'])
-    return calupdate(request)
+    return update(request)
 
