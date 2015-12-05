@@ -17,10 +17,10 @@ class Currency(models.Model):
     current = models.FloatField(null=True, blank=True)
     current_updated = models.DateField(null=True, blank=True)
     five_yr_mean = models.FloatField(null=True, blank=True)
-    five_yr_stdev = models.FloatField(null=True, blank=True)
+    #five_yr_stdev = models.FloatField(null=True, blank=True)
     #five_yr_values = models.TextField(null=True, blank=True)
-    z_score = models.FloatField(null=True, blank=True)
-    #percent_change = models.FloatField(null=True, blank=True)
+    #z_score = models.FloatField(null=True, blank=True)
+    percent_change = models.FloatField(null=True, blank=True)
 
 class Country(models.Model):
     code = models.CharField(max_length=3, unique=True)

@@ -7,7 +7,15 @@ def iconclass(wetdry):
     return "umbrella"
   elif wetdry == "Dry":
     return "sun-o"
-
+@register.filter(name='format_percentage')
+def divideby(value):
+    return abs(value)*100
+@register.filter(name='better_worse')
+def divideby(value):
+    if value < 0:
+      return "worse"
+    else:
+      return "better"
 @register.filter
 def get_range( value ):
   """

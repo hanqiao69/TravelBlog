@@ -89,7 +89,6 @@ def country(request, country_code):
     except ObjectDoesNotExist:
         return redirect('/ranking')
     dict_country = model_to_dict(country)
-    dict_metric = {"name":"Safety", "score":5.0}
     list_metrics = []
     order = ["safety", "price", "nature", "culture", "environment", "air", "ground", "tourist", "health", "internet", "travel", "openness", ]
     name = ["Safety", "Price", "Natural Life", "Cultural Resources", "Env. Sustainability", "Air Infrastructure", "Ground Infrastructure", "Tourism Infrastructure", "Healthcare", "Internet", "Gov't Focus on Tourism", "Int'l Openness"]
@@ -120,7 +119,15 @@ def country(request, country_code):
         rainfall += " "
     temperature = temperature[:-1]+"]}"
     rainfall = rainfall[:-1]+"]}"
-    data = {"country": dict_country, "metrics": string, "metrics_2": metrics_2, "labels": name, "temperature": temperature, "rainfall": rainfall}
+
+    #get currency data
+    currency = country.currency.all()
+    dict_currency = None
+    if currency != None:
+      currency = currency[0]
+      dict_currency = model_to_dict(currency)
+      dict_currency["url"] = "https://www.google.com/finance/chart?es_sm=119&q=CURRENCY:USD"+currency.code+"&tkr=1&p=5Y&chst=vkc&chs=500x300&chsc=1&ei=K2U2VpilKouvetuxrpgF"
+    data = {"country": dict_country, "dict_currency": dict_currency, "metrics": string, "metrics_2": metrics_2, "labels": name, "temperature": temperature, "rainfall": rainfall}
     return render_to_response('country.html', data, RequestContext(request))
 def ranking(request):
     data = {}
