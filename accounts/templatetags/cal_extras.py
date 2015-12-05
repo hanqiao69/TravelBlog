@@ -27,6 +27,8 @@ def better_worse(value):
       return "better"
 @register.filter(name='value_percentage')
 def val_perc(value):
+    if not value:
+      return "N/A"
     if value < -0.01:
       return "Poor"
     elif value < 0.01:
