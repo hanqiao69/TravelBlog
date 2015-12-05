@@ -27,3 +27,7 @@ from import_weather_complete import *
 populate()
 from import_fixexd_names import *
 populate()
+from import_currency import *
+populate()
+from import_currency_pairs import *
+populate()
