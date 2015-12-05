@@ -87,6 +87,8 @@ def currency(request):
       if currency != None and len(currency)>0:
         currency = currency[0]
         dict_country["currency"] = currency
+        dict_country["url"] = "https://www.google.com/finance/chart?es_sm=119&q=CURRENCY:USD"+currency.code+"&tkr=1&p=5Y&chst=vkc&chs=180x90&chsc=1&ei=K2U2VpilKouvetuxrpgF&format=none"
+
         if currency.percent_change != None:
           negative = ""
           if currency.percent_change < 0:

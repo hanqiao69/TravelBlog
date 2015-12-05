@@ -33,6 +33,7 @@ Currency Exchange - Relative to 5 Year Average
                         <tr>
                             <th>Country</th>
                             <th>Currency</th>
+                            <th>Trend</th>
                             <th>1 USD = </th>
                             <th>Five Year Avg</th>
                             <th>% Change from Avg</th>
@@ -44,6 +45,7 @@ Currency Exchange - Relative to 5 Year Average
                         <tr>
                             <td><a href="/countries/{{country.code}}/">{{country.name}}</a></td>
                             <td>{{country.currency.name}}</td>
+                            <td><img src = "{{country.url|safe}}"></img></td>
                             <td>{{country.currency.current|floatformat:2}} {{country.currency.code}}</td>
                             <td>{{country.currency.five_yr_mean|floatformat:2}} </td>
                             <td>{{country.currency.percent_change|format_percentage_signed|floatformat:2}}%</td>
