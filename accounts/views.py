@@ -78,9 +78,24 @@ def climate(request, month):
     data = {"text_mon":text, "rainfall_data":rainfall_data, "countries": countries, "temperature_data": temperature_data}
     return render_to_response('climate.html', data, RequestContext(request))
 def currency(request):
-    chart = "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=1883251703&amp;format=interactive"
+    currency_data = "[['Country', 'Percentage Change'],"
+    query_countries = Country.objects.all()
+    countries = []
+    for country in query_countries:
+      dict_country = model_to_dict(country)
+      currency = country.currency.all()
+      if currency != None and len(currency)>0:
+        currency = currency[0]
+        dict_country["currency"] = currency
+        if currency.percent_change != None:
+          negative = ""
+          if currency.percent_change < 0:
+            negative = "-"
+          currency_data += '["'+dict_country["name"]+'",'+negative+str(abs(round(currency.percent_change*100,2)))+'],'
+      countries.append(dict_country)
+    currency_data = currency_data[:-1]+"]"
     map_five_chart = "https://docs.google.com/spreadsheets/d/1ETe5bXdUNtejhv9Axph4fKl94p6g2vysDMDgH0JY_B4/pubchart?oid=489787441&amp;format=interactive"
-    data = {"chart":chart, "map_five_chart":map_five_chart}
+    data = {"countries":countries, "currency_data":currency_data}
     return render_to_response('currency.html', data, RequestContext(request))
 def country(request, country_code):
     country = None

@@ -8,14 +8,35 @@ def iconclass(wetdry):
   elif wetdry == "Dry":
     return "sun-o"
 @register.filter(name='format_percentage')
-def divideby(value):
+def format_perc(value):
+  if value:
     return abs(value)*100
+  else:
+    return value
+@register.filter(name='format_percentage_signed')
+def format_perc_signed(value):
+  if value:
+    return (value)*100
+  else:
+    return value
 @register.filter(name='better_worse')
-def divideby(value):
+def better_worse(value):
     if value < 0:
       return "worse"
     else:
       return "better"
+@register.filter(name='value_percentage')
+def val_perc(value):
+    if value < -0.01:
+      return "Poor"
+    elif value < 0.01:
+      return "So-So"
+    elif value < 0.1:
+      return "Good"
+    elif value < 0.2:
+      return "Great"
+    else:
+      return "Spectacular"
 @register.filter
 def get_range( value ):
   """
