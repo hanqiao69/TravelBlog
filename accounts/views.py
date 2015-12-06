@@ -288,7 +288,7 @@ def autocompleteModel(request):
   return HttpResponse(data, mimetype)
 def search(request):
     if request.method == "POST":
-      country = request.POST.get("txtSearch")
+      country = request.POST.get("txtSearch").capitalize()
       try:
         country_found = Country.objects.get(name=country)
         return redirect('/countries/'+country_found.code)
