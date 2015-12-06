@@ -274,7 +274,7 @@ def capitalize_rain(rainfall):
     return "Rainy"
 def autocompleteModel(request):
   if request.is_ajax():
-    q = request.GET.get('term', '')
+    q = request.GET.get('term', '').capitalize()
     search_qs = Country.objects.filter(name__startswith=q)
     results = []
     print q
