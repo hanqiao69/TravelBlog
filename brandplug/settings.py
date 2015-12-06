@@ -75,21 +75,21 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DATABASES = {
- 'default': {
- 'ENGINE': 'django.db.backends.postgresql_psycopg2',
- 'NAME': 'd9tchc7msmuu39', 
- 'USER': 'oudfjwwlnvbiln',
- 'PASSWORD': 'NXg2B6QiiyxW9nkwR82HKYGtur',
- 'HOST': 'ec2-54-83-203-50.compute-1.amazonaws.com'
- }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+# DATABASES = {
+#  'default': {
+#  'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#  'NAME': 'd9tchc7msmuu39', 
+#  'USER': 'oudfjwwlnvbiln',
+#  'PASSWORD': 'NXg2B6QiiyxW9nkwR82HKYGtur',
+#  'HOST': 'ec2-54-83-203-50.compute-1.amazonaws.com'
+#  }
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -119,10 +119,10 @@ from os import path
 PROJECT_ROOT = path.dirname(path.abspath(path.dirname(__file__)))
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+#DATABASES['default'] = dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']

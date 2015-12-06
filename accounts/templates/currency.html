@@ -59,7 +59,8 @@ Currency Exchange - Relative to 5 Year Average
     </div>
 </div>
 <script>
-window.onload=function() {
+    window.onload=function() {
+
         var data = google.visualization.arrayToDataTable({{currency_data|safe}});
         var options = {
           colorAxis: {values: [-40, 0, 40, 150], colors: ['red', "#FFF", 'green', "#004600"]}
