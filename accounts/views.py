@@ -8,7 +8,7 @@ from django.shortcuts import redirect, render_to_response
 # from django.template.loader import get_template
 # from django.template import Context
 # from django.http import HttpResponseRedirect
-# from django.http import HttpResponse, StreamingHttpResponse
+from django.http import HttpResponse, StreamingHttpResponse
 from django.template import RequestContext
 from django.forms.models import model_to_dict
 # from django.template import Context, Template
@@ -16,6 +16,7 @@ from django.forms.models import model_to_dict
 from accounts.models import CustomUser, Group, Country
 import datetime
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 # from allauth.socialaccount.models import SocialToken
 # from allauth.socialaccount.models import SocialAccount
 text_month = {"jan": "January",
@@ -271,6 +272,31 @@ def capitalize_rain(rainfall):
     return "Dry"
   if rainfall == "wet":
     return "Rainy"
+def autocompleteModel(request):
+  if request.is_ajax():
+    q = request.GET.get('term', '')
+    search_qs = Country.objects.filter(name__startswith=q)
+    results = []
+    print q
+    for r in search_qs:
+      results.append(r.name)
+    print results
+    data = json.dumps(results)
+  else:
+      data = 'fail'
+  mimetype = 'application/json'
+  return HttpResponse(data, mimetype)
+def search(request):
+    if request.method == "POST":
+      country = request.POST.get("txtSearch")
+      try:
+        country_found = Country.objects.get(name=country)
+        return redirect('/countries/'+country_found.code)
+      except ObjectDoesNotExist:
+        pass
+    countries = Country.objects.all().order_by('name')
+    data = {"countries": countries}
+    return render_to_response('filter_countries.html', data, RequestContext(request))
 
 @login_required(login_url='/accounts/login')
 def profile(request, user_id):

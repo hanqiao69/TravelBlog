@@ -25,6 +25,10 @@
 		<link href="{%static "css/jquery.circliful.css"%}" rel="stylesheet">
 		<script src="{%static "js/chart.js"%}"></script>
 		<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['geochart']}]}"></script>
+		<script src="{%static "js/jquery.min.js"%}"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+		<link href="{%static "css/theme-jquery-ui.css"%}" rel="stylesheet">
 		<!-- Fonts -->
 		<link href="http://fonts.googleapis.com/css?family=Lato:400,900,300,700" rel="stylesheet">
 		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic" rel="stylesheet">
@@ -117,16 +121,20 @@
 								
 				
 								
-								<li class="dropdown pull-right searchbox">
-									<a href="#" class="dropdown-toggle js-activated"><i class="icon-search"></i></a>
-											  
-									<div class="dropdown-menu">
-										<form id="search" class="navbar-form search" role="search">
-											<input type="search" class="form-control" placeholder="Type to search">
-											<button type="submit" class="btn btn-default btn-submit icon-right-open"></button>
-										</form>
-									</div><!-- /.dropdown-menu -->
-								</li><!-- /.searchbox -->
+								<li class="searchbox">
+                                    
+                                    <form id="search" class="navbar-form search" style="margin-top:4px;" role="search" method="POST" action="{% url 'search' %}">
+                                            {% csrf_token %}
+                                            <div style="width:250px">
+                                                <input type="text" class="form-control" id="txtSearch" name="txtSearch">
+                                            </div>
+                                            <button type="submit" class="btn btn-default btn-submit"><i class="icon-search"></i></button>
+                                        </form>
+                                              
+                                </li><!-- /.searchbox -->
+
+
+                                
 								
 							</ul><!-- /.nav -->
 							
@@ -184,7 +192,6 @@
 		<!-- ============================================================= FOOTER : END ============================================================= -->
 		
 		<!-- JavaScripts placed at the end of the document so the pages load faster -->
-		<script src="{%static "js/jquery.min.js"%}"></script>
 		<script src="{%static "js/jquery.easing.1.3.min.js"%}"></script>
 		<script src="{%static "js/jquery.form.js"%}"></script>
 		<script src="{%static "js/jquery.validate.min.js"%}"></script>
@@ -222,6 +229,15 @@
 		<script>
 			$(document).ready(function(){ 
 				$(".changecolor").switchstylesheet( { seperator:"color"} );
+				$("#txtSearch").autocomplete({
+                    source: "/ajax_calls/search",
+                    minLength: 2,
+                    open: function(){
+                        setTimeout(function () {
+                            $('.ui-autocomplete').css('z-index', 99999999999999);
+                        }, 0);
+                    }
+                  });
 			});
 		</script>
 		<!-- For demo purposes – can be removed on production : End -->

@@ -16,6 +16,8 @@ urlpatterns = patterns(
     url(r'^climate/(?P<month>[\w.@+-]+)/$', climate),
     url(r'^countries/(?P<country_code>[\w.@+-]+)/$', country),
     url(r'^ranking/$', ranking),
+    url(r'^ajax_calls/search/', autocompleteModel),
+    url(r'^search/$', search, name='search'),
     
 )
 urlpatterns += staticfiles_urlpatterns()
