@@ -4792,7 +4792,9 @@ input:focus:-ms-input-placeholder {
 }
 
 @media (max-width: 1024px) {
-	
+	.fix-margin-on-small{
+		margin: 50px;
+	}
 	html {
 		overflow-x: hidden;
 	}
@@ -5102,6 +5104,9 @@ input:focus:-ms-input-placeholder {
 }
 
 @media (max-width: 969px) { 
+	.fix-margin-on-small{
+		margin: 50px;
+	}
 	.yamm .dropdown.yamm-fullwidth .dropdown-menu {
 	    width: 100%;
 	}
@@ -5171,7 +5176,9 @@ input:focus:-ms-input-placeholder {
 }
 
 @media (max-width: 767px) {
-	
+	.fix-margin-on-small{
+		margin: 0px;
+	}
 	body {
 		height: 100vh;
 	}
@@ -5812,7 +5819,9 @@ input:focus:-ms-input-placeholder {
 }
 
 @media (min-width: 768px) and (max-height: 1024px) {
-	
+	.fix-margin-on-small{
+		margin: 50px;
+	}
 	.height-xs,
 	.height-sm,
 	#owl-main .item {

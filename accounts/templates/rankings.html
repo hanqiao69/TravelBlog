@@ -257,7 +257,7 @@ $(document).ready(function(){
 
 <form action="#" method="post">
   {% csrf_token %}
-    <div style="margin:50px">
+    <div class="fix-margin-on-small">
     	<table width="100%">
     		<tr>
     			<td width="40%"><label>Importance</label></td><td>
@@ -309,7 +309,7 @@ $(document).ready(function(){
              <input type="range" name="11" id="points" value="{{ranking11}}" min="0" max="7"></td></tr>
         </table>
     </div>
-    <div style="margin:50px; border-top: 1pt solid #d3d3d3; padding-top: 40px; padding-bottom:0px; border-spacing:0 5px;">
+    <div style="border-top: 1pt solid #d3d3d3; padding-top: 40px; padding-bottom:0px; border-spacing:0 5px;" class="fix-margin-on-small">
         <table width="100%">
     		<tr id="month-row">
     			<td width="30%"><label>I will be traveling in: </label></td>
@@ -332,7 +332,7 @@ $(document).ready(function(){
         </table>
 
     </div>
-    <div id="temperature-row" style="display:none; border-top: 1pt solid #d3d3d3; padding-top: 40px; padding-bottom:0px; border-spacing:0 5px; margin:50px">
+    <div id="temperature-row" style="display:none; border-top: 1pt solid #d3d3d3; padding-top: 40px; padding-bottom:0px; border-spacing:0 5px;" class="fix-margin-on-small">
         <table width="100%">
     		<tr>
     			<td width="30%"><label>I want the temperature to be (°F):</label></td>
@@ -359,7 +359,7 @@ $(document).ready(function(){
             </tr>
         </table>
     </div>
-    <div id="rainfall-row" style="display:none; border-top: 1pt solid #d3d3d3; padding-top: 40px; padding-bottom:0px; border-spacing:0 5px; margin:50px">
+    <div id="rainfall-row" style="display:none; border-top: 1pt solid #d3d3d3; padding-top: 40px; padding-bottom:0px; border-spacing:0 5px" class="fix-margin-on-small">
         <table width="100%">
     		<tr>
     			<td width="30%"><label>Rainy/Dry Season</label></td>
