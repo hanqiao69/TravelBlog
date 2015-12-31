@@ -10,6 +10,20 @@ Demo URI: 		http://demo.fuviz.com/reen
 /*	GENERAL
 /*===================================================================================*/
 
+canvas{
+        width: 100% !important;
+        max-width: 800px;
+        height: auto !important;
+        padding: 0;
+       	display: block;
+		margin: auto;
+}
+.chart-container{
+	display: block;
+	margin: auto;
+	height:400px;
+	width:800px;
+}
 .chart-legend li span{
     display: inline-block;
     width: 12px;
@@ -4470,6 +4484,12 @@ input:focus:-ms-input-placeholder {
 /*===================================================================================*/
 
 @media (min-width: 1200px) { 
+	.chart-container{
+		display: block;
+		margin: auto;
+		height:400px;
+		width:800px;
+	}
 	.container {
 	    padding-right: 0;
 	    padding-left: 0;
@@ -4621,7 +4641,12 @@ input:focus:-ms-input-placeholder {
 /*	br {
 		display: none;
 	}*/
-	
+	.chart-container{
+		display: block;
+		margin: auto;
+		height:400px;
+		width:800px;
+	}
 	#team .inner-left {
 		padding-left: 40px;
 	}
@@ -5113,6 +5138,12 @@ input:focus:-ms-input-placeholder {
 }
 
 @media (min-width: 768px) {
+	.chart-container{
+		display: block;
+		margin: auto;
+		height:400px;
+		width:800px;
+	}
 	.navbar-collapse.collapse {
 		padding-bottom: 30px;
 	}
@@ -5176,6 +5207,10 @@ input:focus:-ms-input-placeholder {
 }
 
 @media (max-width: 767px) {
+	.chart-container{
+		height:400px;
+		width:300px;
+	}
 	.fix-margin-on-small{
 		margin: 0px;
 	}

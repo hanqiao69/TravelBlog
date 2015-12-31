@@ -25,8 +25,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>World Economic Forum Tourism Metrics (Polar Diagram): 0(worst) - 7(best)</h3>
                     </div>
-                    <div class="panel-body">
-                        <canvas id="metrics-chart"></canvas>
+                    <div class="panel-body" height="800px">
+                        <canvas id="metrics-chart" height="400px" style="display:block; margin:auto;"></canvas>
                     </div>
                 </div>
             </div>
@@ -39,8 +39,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>World Economic Forum Tourism Metrics (Bar Chart): 0(worst) - 7(best)</h3>
                     </div>
-                    <div class="panel-body">
-                        <canvas id="bar-chart" height="300px"></canvas>
+                    <div class="panel-body" height="800px">
+                        <canvas id="bar-chart" height="400px"></canvas>
                     
                     </div>
                 </div>
@@ -53,8 +53,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>World Bank Temperature/Rainfall Data (Bar Chart)</h3>
                     </div>
-                    <div class="panel-body">
-                        <canvas id="temp-rainfall-chart"></canvas>
+                    <div class="panel-body" height="800px">
+                    <canvas id="temp-rainfall-chart" style="display:block; margin:auto;"></canvas>
                     <div id="js-legend" class="chart-legend"></div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                     <div class="panel-body">
                         <table>
                             <tr>
-                                <td width="50%">
+                                <td width="70%">
                                     Currency: {{dict_currency.name}}
                                     <br/>
                                     1 USD = {{dict_currency.current|floatformat:2}} {{dict_currency.code}}
@@ -94,23 +94,20 @@
 
 </main>
 <script>
-var myNewChart3;
-var myNewChart;
-var myNewChart2;
 window.onload=function() {
         var ctx3 = document.getElementById("temp-rainfall-chart").getContext("2d");
         var data3 = {labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], datasets:[{{temperature|safe}}, {{rainfall|safe}}]};
-        myNewChart3 = new Chart(ctx3).Line(data3);
+        var myNewChart3 = new Chart(ctx3).Line(data3);
         document.getElementById('js-legend').innerHTML = myNewChart3.generateLegend();
         var ctx = document.getElementById("metrics-chart").getContext("2d");
         var data = [{{metrics|safe}}];
-        myNewChart = new Chart(ctx).PolarArea(data);
+        var myNewChart = new Chart(ctx).PolarArea(data);
         $("#metrics-chart").append(myNewChart.generateLegend())
         var ctx2 = document.getElementById("bar-chart").getContext("2d");
         var data2 = {labels: {{labels|safe}}, datasets:[{{metrics_2|safe}}]};
-        myNewChart2 = new Chart(ctx2).Bar(data2);
+        var myNewChart2 = new Chart(ctx2).Bar(data2);
         Chart.defaults.global.responsive = true;
-        Chart.defaults.global.scaleFontSize = 19;
+
     };
 </script>
 {%endblock%}
