@@ -10,10 +10,14 @@ Demo URI: 		http://demo.fuviz.com/reen
 /*	GENERAL
 /*===================================================================================*/
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1000px) {
+  .panel-body.panel-body-no-margin {
+  	margin-right: 0px;
+  	margin-left: 0px;
+  	padding: 0px;
+  }
   .alt-table-responsive {
     width: 100%;
-    margin-bottom: 15px;
     overflow-y: hidden;
     overflow-x: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
