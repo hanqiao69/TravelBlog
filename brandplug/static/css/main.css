@@ -4652,7 +4652,7 @@ input:focus:-ms-input-placeholder {
 	}
 }
 
-@media (min-width: 1025px) and (max-width: 1199px) {
+@media (min-width: 1198px) and (max-width: 1199px) {
 	
 /*	br {
 		display: none;
@@ -4832,7 +4832,7 @@ input:focus:-ms-input-placeholder {
 	}
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1198px) {
 	.fix-margin-on-small{
 		margin: 50px;
 	}

@@ -3,11 +3,21 @@
 {% load i18n %}
 {% load account %}
 {% load url from future %}
+        <link rel="stylesheet" href="{%static "css/style.css"%}">
 
+    
+    
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
 
+    <div class="container">
+
+  <div id="login-form">
+
+    <h3>Login</h3>
+
+    <fieldset>
 {% if socialaccount.providers  %}
 
 <div class="socialaccount_ballot">
@@ -42,6 +52,11 @@
 </form>
 </div></div>
 
+    </fieldset>
+
+  </div> <!-- end login-form -->
+
+</div>
 {% endblock %}
 
 <!-- 
