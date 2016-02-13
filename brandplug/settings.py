@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 )
 ROOT_URLCONF = 'brandplug.urls'
 AUTHENTICATION_BACKENDS = (
@@ -66,9 +67,26 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-SOCIALACCOUNT_PROVIDERS = {
-    'instagram': {'SCOPE': ['basic']}
-}
+SOCIALACCOUNT_PROVIDERS =  {'facebook':
+       {'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time'],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'en-US',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v2.4'}}
 
 WSGI_APPLICATION = 'brandplug.wsgi.application'
 LOGIN_REDIRECT_URL = "/"

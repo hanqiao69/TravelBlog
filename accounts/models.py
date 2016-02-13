@@ -135,11 +135,6 @@ def prepopulate_profile(sender, instance, created, **kwargs):
         user_profile.username = extra.get('username')
         user_profile.profile_image = extra.get('profile_picture')
         user_profile.fullname = extra.get('fullname')
-        user_profile.counts = extra.get('counts')
-        ucounts = dict([(str(k), v) for k, v in extra.get('counts').items()])
-        user_profile.posts = ucounts.get('media')
-        user_profile.followers = ucounts.get('followed_by')
-        user_profile.numfollow = ucounts.get('follows')
         user_profile.instagramid = extra.get('id')
         user_profile.provider = social_account.provider
         user_profile.save()
