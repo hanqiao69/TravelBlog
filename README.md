@@ -1,4 +1,4 @@
-Instructions for running Transcription Project locally:
+Instructions for running Project locally:
 	1. Open in Command Prompt the file repository
 	2. Type 'python manage.py runserver'
 	3. Navigate to '127.0.0.1:8000'
@@ -15,19 +15,3 @@ In order to reset the database, run (in Command Prompt):
 Follow prompts to create superuser and record the username and password
 	python manage.py runserver
 
-
-Import instructions:
-
-python manage.py shell
-from import_countries import *
-populate()
-from import_weather import *
-populate()
-from import_weather_complete import *
-populate()
-from import_fixexd_names import *
-populate()
-from import_currency import *
-populate()
-from import_currency_pairs import *
-populate()
