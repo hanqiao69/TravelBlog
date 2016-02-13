@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <style type="text/css">
+    body {
+      font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    }
+
+    .trip-day {
+      margin-bottom: 20px;
+    }
+    .trip-entry {
+      display: flex;
+      flex-basis: 0;
+    }
+    .trip-entry-left {
+      width: 60%;
+      padding: 20px;
+    }
+    .trip-entry-photos-placeholder {
+      width: 20%;
+      height: 70px;
+      background-color: gray;
+      box-sizing: border-box;
+      margin: 2%;
+      float: left;
+    }
+    .trip-entry-timeline {
+      width: 120px;
+      border-left: 1px solid black;
+      position: relative;
+    }
+    .trip-entry-marker {
+      width: 20px;
+      height: 20px;
+      border-radius: 100%;
+      position: absolute;
+      top: 45px;
+      left: -10px;
+      background-color: black;
+    }
+    .trip-entry-time {
+      position: absolute;
+      left: 20px;
+      top: 45px;
+      font-size: 15px;
+      line-height: 20px;
+    }
+    .trip-entry-right {
+      width: 40%;
+      padding: 20px 20px 20px 120px;
+      position: relative;
+      border-left: 1px solid black;
+    }
+    .trip-entry-new {
+      height: 100px;
+    }
+    .trip-entry-new-marker {
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+      position: absolute;
+      top: 50px;
+      left: -25px;
+      box-sizing: border-box;
+      border: 2px solid black;
+      font-size: 40px;
+      line-height: 1em;
+      background-color: white;
+      text-align: center;
+    }
+    .trip-day-header {
+      border-bottom: 1px solid black;
+      padding: 0 12px 5px 12px;
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: -10px;
+      transform: translateX(-50%);
+    }
+    .trip-entry:first-child .trip-entry-right {
+      border: none;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="trip-day">
+  <div class="trip-entry">
+    <div class="trip-entry-left"></div>
+    <div class="trip-entry-right">
+      <h2 class="trip-day-header">13 Feb 2016</h2>
+    </div>
+  </div>
+
+  <div class="trip-entry">
+    <div class="trip-entry-left">
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+      <div class="trip-entry-photos-placeholder"></div>
+    </div>
+    <div class="trip-entry-right">
+      <div class="trip-entry-marker"></div>
+      <div class="trip-entry-time">10:00 AM</div>
+
+      <h2>Location</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non metus velit. Curabitur efficitur a purus a finibus. Proin quis leo id sapien lacinia efficitur. Aliquam sit amet tortor ac lacus sollicitudin placerat. Vivamus tincidunt lectus neque, non suscipit neque dapibus vitae. Sed et est quis diam scelerisque eleifend. Duis semper pretium dignissim. Nulla porttitor vestibulum euismod. Proin porta tincidunt lacinia. Mauris dignissim ipsum ac elementum interdum. Suspendisse est odio, aliquam quis gravida quis, mattis non nisl.</p>
+    </div>
+  </div>
+
+  <div class="trip-entry">
+    <div class="trip-entry-left">
+      <div class="trip-entry-photos-placeholder"></div>
+    </div>
+    <div class="trip-entry-right">
+      <div class="trip-entry-marker"></div>
+      <div class="trip-entry-time">10:00 AM</div>
+
+      <h2>Location</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non metus velit. Curabitur efficitur a purus a finibus. Proin quis leo id sapien lacinia efficitur. Aliquam sit amet tortor ac lacus sollicitudin placerat. Vivamus tincidunt lectus neque, non suscipit neque dapibus vitae. Sed et est quis diam scelerisque eleifend. Duis semper pretium dignissim. Nulla porttitor vestibulum euismod. Proin porta tincidunt lacinia. Mauris dignissim ipsum ac elementum interdum. Suspendisse est odio, aliquam quis gravida quis, mattis non nisl.</p>
+    </div>
+  </div>
+
+  <div class="trip-entry trip-entry-new">
+    <div class="trip-entry-left"></div>
+    <div class="trip-entry-right">
+      <div class="trip-entry-new-marker">+</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
