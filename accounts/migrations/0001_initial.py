@@ -64,41 +64,25 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='InfluencerProfile',
+            name='NormalUserProfile',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('username', models.CharField(max_length=500)),
                 ('profile_image', models.TextField(null=True, blank=True)),
+                ('provider', models.TextField(null=True, verbose_name=b'provider', blank=True)),
                 ('fullname', models.TextField(null=True, blank=True)),
                 ('counts', models.TextField(null=True, blank=True)),
                 ('posts', models.IntegerField(null=True, blank=True)),
                 ('followers', models.IntegerField(null=True, blank=True)),
                 ('numfollow', models.IntegerField(null=True, blank=True)),
                 ('instagramid', models.TextField(null=True, blank=True)),
+                ('search_cache', models.TextField(null=True, blank=True)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,
             },
             bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='WeekCalendar',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('start_date', models.DateField(null=True, blank=True)),
-                ('availability', models.TextField(null=True, blank=True)),
-                ('user', models.ManyToManyField(related_name='owner', null=True, to=settings.AUTH_USER_MODEL, blank=True)),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.AddField(
-            model_name='group',
-            name='weeklycals',
-            field=models.ManyToManyField(related_name='groupcals', null=True, to='accounts.WeekCalendar', blank=True),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='customuser',

@@ -11,38 +11,6 @@ from allauth.socialaccount.models import SocialAccount
 # import hashlib
 import cPickle
 
-class Currency(models.Model):
-    code = models.CharField(max_length=3, unique=True)
-    name = models.CharField(max_length=500)
-    current = models.FloatField(null=True, blank=True)
-    current_updated = models.DateField(null=True, blank=True)
-    five_yr_mean = models.FloatField(null=True, blank=True)
-    #five_yr_stdev = models.FloatField(null=True, blank=True)
-    #five_yr_values = models.TextField(null=True, blank=True)
-    #z_score = models.FloatField(null=True, blank=True)
-    percent_change = models.FloatField(null=True, blank=True)
-
-class Country(models.Model):
-    code = models.CharField(max_length=3, unique=True)
-    name = models.CharField(max_length=500)
-    currency = models.ManyToManyField(Currency, null=True, blank=True)
-    temperature = models.TextField(null=True, blank=True) #temperature is array of length 13 (fahrenheit), one for each month and avg
-    rainfall = models.TextField(null=True, blank=True) #precip is array of length 13 (mm), one for each month and avg
-    rainy_dry = models.TextField(null=True, blank=True) #rainy_dry is array of length 12, one for each month
-    safety = models.FloatField(null=True, blank=True)
-    health = models.FloatField(null=True, blank=True)
-    internet = models.FloatField(null=True, blank=True)
-    travel = models.FloatField(null=True, blank=True)
-    openness = models.FloatField(null=True, blank=True)
-    price = models.FloatField(null=True, blank=True)
-    environment = models.FloatField(null=True, blank=True)
-    air = models.FloatField(null=True, blank=True)
-    ground = models.FloatField(null=True, blank=True)
-    tourist = models.FloatField(null=True, blank=True)
-    nature = models.FloatField(null=True, blank=True)
-    culture = models.FloatField(null=True, blank=True)
-    #homocides = models.IntegerField(null=True, blank=True)
-    #peace_index = models.TextField(null=True, blank=True)
 
 # ---DATABASE-MODELS------------------------------------------------------
 class CustomUser(AbstractUser):
@@ -130,6 +98,20 @@ class Group(models.Model):
 
     def __unicode__(self):
         return str(self.id)
+class Photo(models.Model):
+    name = models.TextField(null=True, blank=True)
+class Entry(models.Model):
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+    geoname = models.TextField(null=True, blank=True)
+    text = models.TextField(null=True, blank=True)
+    photos = models.ManyToManyField(Photo, null=True, blank=True)
+class Post(models.Model):
+    entries = models.ManyToManyField(Entry, null=True, blank=True)
+class Trip(models.Model):
+    name = models.CharField(max_length=500)
+    user = models.ForeignKey(CustomUser)
+    posts = models.ManyToManyField(Post, null=True, blank=True)
 
 
 # ---SIGNAL-HANDLERS-----------------------------------------------------------
@@ -167,3 +149,5 @@ post_save.connect(prepopulate_profile, sender=SocialAccount)
 
 
 post_save.connect(create_user_profile, sender=CustomUser)
+
+
