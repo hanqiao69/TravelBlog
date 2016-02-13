@@ -3,57 +3,59 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <!-- Meta -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        
-        <title>Travel Bug</title>
-        
-        <!-- Bootstrap Core CSS -->
-        <link href="{%static "font-awesome/css/font-awesome.min.css"%}" rel="stylesheet">
-        <link href="{%static "css/bootstrap.min.css"%}" rel="stylesheet">
-        <!-- Customizable CSS -->
-        <link href="{%static "css/main.css"%}" rel="stylesheet" data-skrollr-stylesheet>
-        <link href="{%static "css/green.css"%}" rel="stylesheet" title="Color">
-        <link href="{%static "css/owl.carousel.css"%}" rel="stylesheet">
-        <link href="{%static "css/owl.transitions.css"%}" rel="stylesheet">
-        <link href="{%static "css/animate.min.css"%}" rel="stylesheet">
-        <link href="{%static "css/jquery.circliful.css"%}" rel="stylesheet">
-        <script src="{%static "js/chart.js"%}"></script>
-        <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['geochart']}]}"></script>
-        
-        
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,900,300,700" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic" rel="stylesheet">
-        
-        <!-- Icons/Glyphs -->
-        <link href="{%static "fonts/fontello.css"%}" rel="stylesheet">
-        
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="{%static "images/favicon.ico"%}">
-        
-        <!-- HTML5 elements and media queries Support for IE8 : HTML5 shim and Respond.js -->
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Travel Bug</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{%static "font-awesome/css/font-awesome.min.css"%}" rel="stylesheet">
+    <link href="{%static "css/bootstrap.min.css"%}" rel="stylesheet">
+    <!-- Customizable CSS -->
+    <link href="{%static "css/main.css"%}" rel="stylesheet" data-skrollr-stylesheet>
+    <link href="{%static "css/green.css"%}" rel="stylesheet" title="Color">
+    <link href="{%static "css/owl.carousel.css"%}" rel="stylesheet">
+    <link href="{%static "css/owl.transitions.css"%}" rel="stylesheet">
+    <link href="{%static "css/animate.min.css"%}" rel="stylesheet">
+    <link href="{%static "css/jquery.circliful.css"%}" rel="stylesheet">
+    <script src="{%static "js/chart.js"%}"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['geochart']}]}"></script>
+    <!-- EXIF Reader -->
+    <script src="{%static "js/exif.js"%}"></script>
+    <!-- script src="{%static "js/getexif.js"%}"></script -->
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,900,300,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic" rel="stylesheet">
+
+    <!-- Icons/Glyphs -->
+    <link href="{%static "fonts/fontello.css"%}" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{%static "images/favicon.ico"%}">
+
+    <!-- HTML5 elements and media queries Support for IE8 : HTML5 shim and Respond.js -->
         <!--[if lt IE 9]>
             <script src="{%static "js/html5shiv.js"%}"></script>
             <script src="{%static "js/respond.min.js"%}"></script>
-        <![endif]-->
-    </head>
-    
-    <body>
-        
-        <!-- ============================================================= HEADER ============================================================= -->
-        
-        <header>
-            <div class="navbar">
-                
-                <div class="navbar-header">
-                    <div class="container">
-                        
+            <![endif]-->
+        </head>
+
+        <body>
+
+            <!-- ============================================================= HEADER ============================================================= -->
+
+            <header>
+                <div class="navbar">
+
+                    <div class="navbar-header">
+                        <div class="container">
+
                         <!--<ul class="info pull-left">
                             <li><a href="#"><i class="icon-mail-1 contact"></i> info@reen.com</a></li>
                             <li><i class="icon-mobile contact"></i> +00 (123) 456 78 90</li>
@@ -82,7 +84,7 @@
                 <div class="yamm">
                     <div class="navbar-collapse collapse">
                         <div class="container">
-                            
+
                             <!-- ============================================================= LOGO ============================================================= -->
                             
                             <a class="navbar-brand" href="/"><h1>TRAVEL BUG</h1></a>
@@ -116,18 +118,18 @@
                                     </ul><!-- /.dropdown-menu -->
                                 </li><!-- /.dropdown -->
                                 
-                
+
                                 
                                 <li class="searchbox">
-                                    
+
                                     <form id="search" class="navbar-form search" style="margin-top:4px;" role="search" method="POST" action="{% url 'search' %}">
-                                            {% csrf_token %}
-                                            <div style="width:250px">
-                                                <input type="text" class="form-control" id="txtSearch" name="txtSearch">
-                                            </div>
-                                            <button type="submit" class="btn btn-default btn-submit"><i class="icon-search"></i></button>
-                                        </form>
-                                              
+                                        {% csrf_token %}
+                                        <div style="width:250px">
+                                            <input type="text" class="form-control" id="txtSearch" name="txtSearch">
+                                        </div>
+                                        <button type="submit" class="btn btn-default btn-submit"><i class="icon-search"></i></button>
+                                    </form>
+
                                 </li><!-- /.searchbox -->
                                 
                             </ul><!-- /.nav -->
@@ -146,51 +148,74 @@
         <!-- ============================================================= MAIN ============================================================= -->
         
         <main>
-            
+
             <!-- ============================================================= SECTION – PORTFOLIO POST ============================================================= -->
             
+            <form action="">
+                <input type="file" name="pic" accept="image/*">
+                <input type="submit">
+            </form>
+            Upload a local file to read Exif data.
+            <br/>
+            <input id="file-input" type="file" />
+            <br/><br/>
+
+            Click the images to read Exif data. The first image tests reading single tags, while the other two simply show all available data.
+            <br/><br/>
+            Note: these examples will not work if running from a local file:// URL.
+            <br/><br/>
+            <img src="static/images/IMG_1211.jpg" style="max-width=100px;" id="img1" />
+            <br/>
+            <img src="static/images/IMG_1218.jpg" style="max-width=100px;max-height=100px;" id="img2" />
+            <br/>
+            <img src="static/images/IMG_1219.jpg" style="max-width=100px;max-height=100px;" id="img3" /><br/>
+            <br/>
+            <button id="objecturltest">Object URL Test</button><br/>
+            <br/>
+            <button id="blobtest">Blob Test</button><br/>
+            <br/>
             <section id="portfolio-post">
                 <div class="container inner-top-md">
-                        
-                        <div class="col-sm-12 inner-top-xs inner-right-xs">
-                            <header>
-                                <h2>{% block pageheader %}{% endblock %}<small>{% block subheader %}{% endblock %}</small></h2>
-                                {% block content %}{% endblock %}
-                            </header>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                    
-                </div><!-- /.container -->
-                
-            </section>
-            <div class="row"><div class="container inner-top-md"></div></div>           
-            <!-- ============================================================= SECTION – PORTFOLIO POST : END ============================================================= -->
-            
 
-            <!-- ============================================================= SECTION – MORE WORKS : END ============================================================= -->
-            
-            
-            <!-- ============================================================= SECTION – SHARE ============================================================= -->
-            
-            
-            <!-- ============================================================= SECTION – SHARE : END ============================================================= -->
-            
-        </main>
-        
-        <!-- ============================================================= MAIN : END ============================================================= -->
-        
-        
-        <!-- ============================================================= FOOTER ============================================================= -->
-        
-        <footer class="dark-bg">
-          
-            <div class="footer-bottom">
-                <div class="container inner">
-                    <p class="pull-left">© 2015. All rights reserved.</p>
-                    <ul class="footer-menu pull-right">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/ranking">Destination Selector</a></li>
-                        <li><a href="/currency">Currency Exchange</a>
+                    <div class="col-sm-12 inner-top-xs inner-right-xs">
+                        <header>
+                            <h2>{% block pageheader %}{% endblock %}<small>{% block subheader %}{% endblock %}</small></h2>
+                            {% block content %}{% endblock %}
+                        </header>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+
+            </div><!-- /.container -->
+
+        </section>
+        <div class="row"><div class="container inner-top-md"></div></div>           
+        <!-- ============================================================= SECTION – PORTFOLIO POST : END ============================================================= -->
+
+
+        <!-- ============================================================= SECTION – MORE WORKS : END ============================================================= -->
+
+
+        <!-- ============================================================= SECTION – SHARE ============================================================= -->
+
+
+        <!-- ============================================================= SECTION – SHARE : END ============================================================= -->
+
+    </main>
+
+    <!-- ============================================================= MAIN : END ============================================================= -->
+
+
+    <!-- ============================================================= FOOTER ============================================================= -->
+
+    <footer class="dark-bg">
+
+        <div class="footer-bottom">
+            <div class="container inner">
+                <p class="pull-left">© 2015. All rights reserved.</p>
+                <ul class="footer-menu pull-right">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/ranking">Destination Selector</a></li>
+                    <li><a href="/currency">Currency Exchange</a>
                     </ul><!-- .footer-menu -->
                 </div><!-- .container -->
             </div><!-- .footer-bottom -->
@@ -219,30 +244,85 @@
         <!-- OnScroll CSS3 Animations for Modern Browsers and IE10+ -->
         <!--[if !IE]> -->
         <script src="{%static "js/onscroll.js"%}"></script>
-                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
-<link href="{%static "css/theme-jquery-ui.css"%}" rel="stylesheet">
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+        <link href="{%static "css/theme-jquery-ui.css"%}" rel="stylesheet">
         <!-- <![endif]-->
         
+        <!-- Exif stuffs -->
+        <script>
+        document.getElementById("img1").onclick = function() {
+            EXIF.getData(this, function() {
+                var make = EXIF.getTag(this, "Make"),
+                model = EXIF.getTag(this, "Model");
+                alert("I was taken by a " + make + " " + model);
+            });
+        }
+        document.getElementById("img2").onclick = function() {
+            EXIF.getData(this, function() {
+                alert(EXIF.pretty(this));
+            });
+        }
+        document.getElementById("img3").onclick = function() {
+            EXIF.getData(this, function() {
+                alert(EXIF.pretty(this));
+            });
+        }
+        document.getElementById("file-input").onchange = function(e) {
+            EXIF.getData(e.target.files[0], function() {
+                alert(EXIF.pretty(this));
+            });
+        }
+        document.getElementById("objecturltest").onclick = function() {
+            var http = new XMLHttpRequest();
+            http.open("GET", "static/images/IMG_1211.jpg", true);
+            http.responseType = "blob";
+            http.onload = function(e) {
+                if (this.status === 200) {
+                    var image = new Image();
+                    image.onload = function() {
+                        EXIF.getData(image, function() {
+                            alert(EXIF.pretty(this));
+                        });
+                    };
+                    image.src = URL.createObjectURL(http.response);
+                }
+            };
+            http.send();
+        }
+        document.getElementById("blobtest").onclick = function() {
+            var http = new XMLHttpRequest();
+            http.open("GET", "static/images/IMG_1211.jpg", true);
+            http.responseType = "blob";
+            http.onload = function(e) {
+                if (this.status === 200) {
+                    EXIF.getData(http.response, function() {
+                        alert(EXIF.pretty(this));
+                    });
+                }
+            };
+            http.send();
+        }
+        </script>
         <!-- For demo purposes – can be removed on production -->
         
         <script>
-            $(document).ready(function(){ 
-                $("#txtSearch").autocomplete({
-                    source: "/ajax_calls/search",
-                    minLength: 2,
-                    open: function(){
-                        setTimeout(function () {
-                            $('.ui-autocomplete').css('z-index', 99999999999999);
-                        }, 0);
-                    }
-                  });
-
-
+        $(document).ready(function(){ 
+            $("#txtSearch").autocomplete({
+                source: "/ajax_calls/search",
+                minLength: 2,
+                open: function(){
+                    setTimeout(function () {
+                        $('.ui-autocomplete').css('z-index', 99999999999999);
+                    }, 0);
+                }
             });
+
+
+        });
 
 
         </script>
         <!-- For demo purposes – can be removed on production : End -->
     </body>
-</html>
+    </html>
