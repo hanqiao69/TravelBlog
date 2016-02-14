@@ -2,35 +2,96 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script src="react.js"></script>
+  <script src="react-dom.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="packery.pkgd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+  <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300|Cantarell:400,700' rel='stylesheet' type='text/css'>
   <title>Title</title>
 
   <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+      background-color: #efefef;
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+    }
+
+    h1 {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    header {
+      position: fixed;
+      top: 0px;
+      width: 100%;
+      margin: 0;
+      height: 50px;
+      background-color: white;
+      z-index: 1;
+      box-shadow: 0px 0px 5px 0px #333;
+      /*text-align: center;*/
+    }
+
+    p {
+      margin: 0px;
+    }
+
+    h2, h1 {
+      font-family: 'Cantarell', sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
     }
 
     .trip-day {
       margin-bottom: 20px;
+    }
+    .trip-date {
+      position: relative;
+      display: block;
+      color: #222;
+      right: 30%;
+      text-align: right;
+      margin-bottom: 0px;
     }
     .trip-entry {
       display: flex;
       flex-basis: 0;
     }
     .trip-entry-left {
-      width: 60%;
-      padding: 20px;
+      width: calc(70% - 70px);
+      margin-right: 50px;
+      margin-left: 20px;
+      margin-top: 50px;
+    }
+    .trip-entry-right {
+      width: 30%;
+      padding: 20px 20px 20px 120px;
+      position: relative;
+      border-left: 1px solid #888;
     }
     .trip-entry-photos-placeholder {
-      width: 20%;
+      /*width: 20%;
       height: 70px;
       background-color: gray;
       box-sizing: border-box;
       margin: 2%;
-      float: left;
+      float: left;*/
     }
     .trip-entry-timeline {
       width: 120px;
-      border-left: 1px solid black;
+      border-left: 1px solid #222;
       position: relative;
     }
     .trip-entry-marker {
@@ -40,8 +101,20 @@
       position: absolute;
       top: 45px;
       left: -10px;
-      background-color: black;
+      background-color: white;
+      border: 1px solid #222;
     }
+    /*.trip-entry-marker:after {
+      border-radius: 100%;
+      width: 18px;
+      height: 18px;
+      content: " ";
+      display: block;
+      position: relative;
+      background-color: white;
+      left: 1px;
+      top: 1px;
+    }*/
     .trip-entry-time {
       position: absolute;
       left: 20px;
@@ -49,11 +122,8 @@
       font-size: 15px;
       line-height: 20px;
     }
-    .trip-entry-right {
-      width: 40%;
-      padding: 20px 20px 20px 120px;
-      position: relative;
-      border-left: 1px solid black;
+    .trip-entry-time p {
+      font-size: 15px;
     }
     .trip-entry-new {
       height: 100px;
@@ -65,82 +135,448 @@
       position: absolute;
       top: 50px;
       left: -25px;
-      box-sizing: border-box;
-      border: 2px solid black;
+      border: 1px solid #222;
       font-size: 40px;
-      line-height: 1em;
-      background-color: white;
+      padding-left: 1px;
+      line-height: 48px;
+      color: white;
+      background-color: #222;
       text-align: center;
     }
+    /*.trip-entry-new-marker:after {
+      border-radius: 100%;
+      width: 48px;
+      height: 48px;
+      content: "+";
+      display: block;
+      position: relative;
+      background-color: white;
+      left: 1px;
+      top: 1px;
+    }*/
     .trip-day-header {
-      border-bottom: 1px solid black;
+      /*border-bottom: 1px solid #222;*/
+      z-index: 1;
       padding: 0 12px 5px 12px;
       display: inline-block;
       position: absolute;
       left: 0;
       top: -10px;
       transform: translateX(-50%);
+      position: fixed;
+      left: 70%;
+      opacity: 1!important;
     }
-    .trip-entry:first-child .trip-entry-right {
+    /*.trip-entry:first-child .trip-entry-right {
       border: none;
       height: 20px;
+    }*/
+    .grid-sizer {
+      width: 20%;
+    }
+    .trip-entry-photo {
+      width: 33%;
+    }
+    @media(max-width: 1199px) {
+      .trip-entry-photo {
+        width: 50%;
+      }
+    }
+    @media(max-width: 767px) {
+      .trip-entry-photo {
+        width: 100%;
+      }
+    }
+    .trip-entry-photo img {
+      width: 100%;
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+    .trip-entry-right div, .trip-entry-left div {
+      opacity: 0;
+      transition: opacity ease 500ms;
+    }
+    .entry-content {
+      background-color: white;
+      padding: 15px;
+    }
+    .entry-title, .entry-title h2, .entry-title h3, .entry-title p  {
+      margin: 0px;
+      font-size: 24px;
+    }
+    p {
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .editable {
+      outline: none;
+    }
+    #trip {
+      top: 50px;
+      position:relative;
     }
   </style>
 </head>
 <body>
 
-<div class="trip-day">
-  <div class="trip-entry">
-    <div class="trip-entry-left"></div>
-    <div class="trip-entry-right">
-      <h2 class="trip-day-header">13 Feb 2016</h2>
-    </div>
-  </div>
+<script>
 
-  <div class="trip-entry">
-    <div class="trip-entry-left">
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-      <div class="trip-entry-photos-placeholder"></div>
-    </div>
-    <div class="trip-entry-right">
-      <div class="trip-entry-marker"></div>
-      <div class="trip-entry-time">10:00 AM</div>
+$.fn.imagesLoaded = function(callback){
+  var elems = this.find('img'),
+      len   = elems.length,
+      _this = this;
 
-      <h2>Location</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non metus velit. Curabitur efficitur a purus a finibus. Proin quis leo id sapien lacinia efficitur. Aliquam sit amet tortor ac lacus sollicitudin placerat. Vivamus tincidunt lectus neque, non suscipit neque dapibus vitae. Sed et est quis diam scelerisque eleifend. Duis semper pretium dignissim. Nulla porttitor vestibulum euismod. Proin porta tincidunt lacinia. Mauris dignissim ipsum ac elementum interdum. Suspendisse est odio, aliquam quis gravida quis, mattis non nisl.</p>
-    </div>
-  </div>
+  elems.bind('load',function(){
+    if (--len <= 0){ 
+      callback.call( _this ); 
+    }
+  }).each(function(){
+    // cached images don't fire load sometimes, so we reset src.
+    if (this.complete || this.complete === undefined){
+      var src = this.src;
+      // webkit hack from http://groups.google.com/group/jquery-dev/browse_thread/thread/eee6ab7b2da50e1f
+      // data uri bypasses webkit log warning (thx doug jones)
+      this.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+      this.src = src;
+    }  
+  }); 
 
-  <div class="trip-entry">
-    <div class="trip-entry-left">
-      <div class="trip-entry-photos-placeholder"></div>
-    </div>
-    <div class="trip-entry-right">
-      <div class="trip-entry-marker"></div>
-      <div class="trip-entry-time">10:00 AM</div>
+  return this;
+};
+</script>
 
-      <h2>Location</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non metus velit. Curabitur efficitur a purus a finibus. Proin quis leo id sapien lacinia efficitur. Aliquam sit amet tortor ac lacus sollicitudin placerat. Vivamus tincidunt lectus neque, non suscipit neque dapibus vitae. Sed et est quis diam scelerisque eleifend. Duis semper pretium dignissim. Nulla porttitor vestibulum euismod. Proin porta tincidunt lacinia. Mauris dignissim ipsum ac elementum interdum. Suspendisse est odio, aliquam quis gravida quis, mattis non nisl.</p>
-    </div>
-  </div>
+<header><div class="container"><h1>My Trip</h1></div></header>
+<div class="container"><div id="trip"></div></div>
+<script type="text/babel">
+  var generateEntry = function() {
+    var photos = [
+    'http://edugeography.com/images/hawaii/hawaii-01.jpg',
+    'http://www.hawaii-all-inclusive.net/files/3318241/uploaded/all-inclusive-waikiki-hawaii-vacation-package.jpg',
+    'http://www.aloha-hawaiian.com/images/newsite/HawaiiSunsetHoneymoon.jpg',
+    'http://media.royalcaribbean.com/content/shared_assets/images/destinations/regions/hero/hawaii_01.jpg',
+    ];
+    var d = new Date(0);
+    d.setHours(Math.random() * 24);
+    return {
+      time: d,
+      location: "Location",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non metus velit. Curabitur efficitur a purus a finibus. Proin quis leo id sapien lacinia efficitur.",
+      photos: photos
+    }
+  }
 
-  <div class="trip-entry trip-entry-new">
-    <div class="trip-entry-left"></div>
-    <div class="trip-entry-right">
-      <div class="trip-entry-new-marker">+</div>
-    </div>
-  </div>
-</div>
+  var generateDay = function() {
+    var entries=[];
+    for (var i=0; i < Math.random() * 10; i++) {
+      entries.push(generateEntry());
+    }
+    entries.sort(function (a, b) {
+      return a.time < b.time ? -1 : 1
+    });
+
+    var day = {
+      day: new Date(),
+      entries: entries
+    }
+    return day;
+  }
+
+  var EntryPicture = React.createClass({
+    getDefaultProps: function () {
+      return {
+        initialPos: {x: 0, y: 0}
+      }
+    },
+
+    getInitialState: function() {
+      return {
+        pos: this.props.initialPos,
+        dragging: false,
+        rel: {x:0, y:0},
+        initialMousePos: null
+      }
+    },
+
+    onMouseDown: function(e) {
+      if (e.button !== 0) return;
+      var pos = $(ReactDOM.findDOMNode(this)).offset();
+      this.setState({
+        dragging: true,
+        initialMousePos: {
+          x: e.pageX,
+          y: e.pageY
+        },
+        pos: $(ReactDOM.findDOMNode(this)).offset()
+      });
+      e.stopPropagation();
+      e.preventDefault();
+    },
+
+    onMouseUp: function(e) {
+      var el = $(ReactDOM.findDOMNode(this));
+      //placeImage(el, [el.offset().left + el.width()/2, el.offset().top + el.height()/2]);
+      this.props.onPicMove(this.props.index, [el.offset().left + el.width()/2, el.offset().top + el.height()/2])
+      this.setState({
+        dragging: false,
+        rel: {x:0, y:0}
+      });
+      e.stopPropagation();
+      e.preventDefault();
+    },
+
+    onMouseMove: function(e) {
+      if (!this.state.dragging) return;
+      this.setState({
+        rel: {
+          x: e.pageX - this.state.initialMousePos.x,
+          y: e.pageY - this.state.initialMousePos.y,
+        }
+      });
+      e.stopPropagation();
+      e.preventDefault();
+    },
+
+    componentDidUpdate: function (props, state) {
+      if (this.state.dragging && !state.dragging) {
+        document.addEventListener('mousemove', this.onMouseMove)
+        document.addEventListener('mouseup', this.onMouseUp)
+      } else if (!this.state.dragging && state.dragging) {
+        document.removeEventListener('mousemove', this.onMouseMove)
+        document.removeEventListener('mouseup', this.onMouseUp)
+      }
+    },
+
+    handleLoad: function(event) {
+      //$(ReactDOM.findDOMNode(this)).find('img').css('opacity', 1);
+    },
+
+    render: function () {
+      return React.DOM.div({
+        onMouseDown: this.onMouseDown,
+        className: 'trip-entry-photo trip-entry-photos-placeholder',
+        style: {
+          transform: 'translate(' + this.state.rel.x + "px, " + this.state.rel.y + "px)"
+        }
+      }, <img onLoad={this.handleLoad} src={this.props.url} />);
+    }
+  })
+
+  var Entry = React.createClass({
+
+    componentDidMount: function () {
+      var that = this;
+      var $container = $(ReactDOM.findDOMNode(this)).find('.trip-entry-left')
+      $container.imagesLoaded(function() {
+        $container.packery({
+          itemSelector: '.trip-entry-photo',
+          percentPosition: true
+        });
+
+        /*$container.find('img').each(function(idx) {
+          setTimeout(function() {
+            $(this).css('opacity', 1);
+          }.bind(this), 600*Math.random());
+        });*/
+
+        $(ReactDOM.findDOMNode(that)).find('div').each(function(idx) {
+          setTimeout(function() {
+            $(this).css('opacity', 1);
+          }.bind(this), 600*Math.random());
+        });
+      });
+
+      this.setState({
+        $container: $container
+      });
+    },
+
+    componentDidUpdate: function (props, state) {
+      //this.relayout();
+    },
+
+    relayout: function () {
+      this.state.$container.packery('reloadItems');
+    },
+
+    onMouseOver: function(e) {
+      this.props.onMouseOver(this.props.index);
+    },
+
+    onPicMove: function(sender, coords) {
+      this.props.onPicMove(this.props.index, sender, coords);
+    },
+
+    render: function () {
+      var that = this;
+      return (
+        <div className="trip-entry" onMouseOver={this.onMouseOver}>
+          <div className="trip-entry-left">
+
+            {this.props.entry.photos.map(function (photo, index) {
+              return (<EntryPicture url={photo} key={index} index={index} onPicMove={that.onPicMove}/>);
+            })}
+
+          </div>
+          <div className="trip-entry-right">
+            <div className="trip-entry-marker"></div>
+            <div className="editable trip-entry-time">{this.props.entry.time.toLocaleTimeString()}</div>
+
+            <div className="entry-content">
+              <h2 className="entry-title editable">{this.props.entry.location}</h2>
+              <p className="editable">{this.props.entry.description}</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  });
+
+  var Day = React.createClass({
+    /*getInitialState: function () {
+      return { 
+        upid: -1,
+        day: "13 Feb 2016", 
+        entries: [
+          {
+            time: "10:00 AM",
+            location: "Location",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non metus velit. Curabitur efficitur a purus a finibus. Proin quis leo id sapien lacinia efficitur.",
+            photos: [
+            'http://edugeography.com/images/hawaii/hawaii-01.jpg',
+            'http://www.hawaii-all-inclusive.net/files/3318241/uploaded/all-inclusive-waikiki-hawaii-vacation-package.jpg',
+            'http://www.aloha-hawaiian.com/images/newsite/HawaiiSunsetHoneymoon.jpg',
+            'http://media.royalcaribbean.com/content/shared_assets/images/destinations/regions/hero/hawaii_01.jpg',
+            ]
+          },
+          {
+            time: "1:00 PM",
+            location: "Location",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non metus velit. Curabitur efficitur a purus a finibus. Proin quis leo id sapien lacinia efficitur.",
+            photos: [
+            'http://edugeography.com/images/hawaii/hawaii-01.jpg',
+            'http://www.hawaii-all-inclusive.net/files/3318241/uploaded/all-inclusive-waikiki-hawaii-vacation-package.jpg',
+            'http://www.aloha-hawaiian.com/images/newsite/HawaiiSunsetHoneymoon.jpg',
+            'http://media.royalcaribbean.com/content/shared_assets/images/destinations/regions/hero/hawaii_01.jpg',
+            ]
+          },
+          {
+            time: "3:00 PM",
+            location: "Location",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non metus velit. Curabitur efficitur a purus a finibus. Proin quis leo id sapien lacinia efficitur.",
+            photos: [
+            'http://edugeography.com/images/hawaii/hawaii-01.jpg',
+            'http://www.hawaii-all-inclusive.net/files/3318241/uploaded/all-inclusive-waikiki-hawaii-vacation-package.jpg',
+            'http://www.aloha-hawaiian.com/images/newsite/HawaiiSunsetHoneymoon.jpg',
+            'http://media.royalcaribbean.com/content/shared_assets/images/destinations/regions/hero/hawaii_01.jpg',
+            ]
+          }
+        ]
+      };
+    },*/
+
+    componentDidMount: function () {
+      var editor = new MediumEditor('.editable');
+    },
+
+    imageChange: function (img, oldParent, newParent) {
+      if (!oldParent || !newParent) {
+        return;
+      }
+    },
+
+    onPicMove: function (entryid, picid, coords) {
+      /*//console.log(this.state.upid)
+      var that = this;
+      $('.trip-entry-left').each(function() {
+        if ($(this).offset().left < coords[0] &&
+            $(this).offset().left + $(this).width() > coords[0] &&
+            $(this).offset().top < coords[1] &&
+            $(this).offset().top + $(this).height() > coords[1]) {
+          
+          var upid = $('.trip-entry-left').index($(this));
+          console.log(upid);
+          that.setState({upid: upid});
+          return false
+        }
+      });
+
+      if (this.state.upid >= 0 && picid >= 0 && entryid >= 0 && this.state.upid != entryid) {
+        var url = this.state.entries[entryid].photos.splice(picid, 1)[0];
+        this.state.entries[this.state.upid].photos.push(url);
+      
+        this.replaceState(this.state);
+        console.log(this.props.children);
+        //this.state.$container.packery('reloadItems');
+      }
+
+      this.setState({upid: -1});*/
+
+    },
+
+    onMouseOver: function (upid) {
+      //this.setState({upid: upid});
+    },
+
+    render: function () {
+      var that = this;
+      return (
+        <div className="trip-day">
+          <h2 className="trip-date">{this.props.day.day.toLocaleDateString()}</h2>
+          <hr />
+
+          {this.props.day.entries.map(function (entry, index) {
+            return (
+              <Entry entry={entry} key={index} index={index} onPicMove={that.onPicMove} onMouseOver={that.onMouseOver}/>
+            );
+          })}
+
+          <div className="trip-entry trip-entry-new">
+            <div className="trip-entry-left"></div>
+            <div className="trip-entry-right">
+              <div className="trip-entry-new-marker">+</div>
+            </div>
+          </div>
+
+        </div>
+      );
+    }
+  });
+
+  var Page = React.createClass({
+    getInitialState: function () {
+      return {
+        days: [generateDay(), generateDay()]
+      }
+    },
+
+    componentDidMount: function () {
+      var that = this;
+      $(window).scroll(function() {
+        if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+          var days = that.state.days;
+          days.push(generateDay());
+          that.setState({
+            days: days
+          });
+        }
+      });
+    },
+
+    render: function() {
+      return (
+        <div>
+          {this.state.days.map(function (day, index) {
+            return (
+              <Day day={day} key={index} />
+            );
+          })}
+        </div>
+      );
+    }
+  });
+
+  ReactDOM.render(<Page />, document.getElementById('trip'));
+</script>
+
 </body>
 </html>
