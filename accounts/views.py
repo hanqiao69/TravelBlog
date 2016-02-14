@@ -81,7 +81,9 @@ def trip(request, tripid):
       editable = True
     posts = selected_trip.posts.all()
     for post in posts:
-      post.entries = post.entries.all()
+      post.entries_list = post.entries.all()
+      for entry in post.entries_list:
+        print entry.text
 
     data = {'editable': editable, 'trip': selected_trip, 'posts': posts}
     print data
