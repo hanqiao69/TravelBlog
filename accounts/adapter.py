@@ -14,7 +14,7 @@ class CorporateAdapter(DefaultAccountAdapter):
         # userr_profile = userr.get_user_profile()
         # threshold = 10
         if userr.corporate is False:
-            return '/profile/update/'
+            return '/profile/trips/'
 
         else:
             return '/corporate/results/'
