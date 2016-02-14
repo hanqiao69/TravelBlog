@@ -13,7 +13,7 @@ from django.template import RequestContext
 from django.forms.models import model_to_dict
 # from django.template import Context, Template
 # from django.core import serializers
-from accounts.models import CustomUser
+from accounts.models import CustomUser, Trip
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -96,6 +96,27 @@ def profileself(request):
 class UploadFileForm(forms.Form):
     image_file = forms.FileField(label='Upload a new profile image')
 
+@login_required(login_url='/accounts/login')
+def trips(request):
+    if request.method == 'POST':
+      trip_name = request.POST.get("trip_name").capitalize()
+      print trip_name
+      new_trip = Trip.objects.create(name=trip_name, user=request.user)
+      new_trip.save()
+    user = CustomUser.objects.get(username=request.user)
+    print user
+    user_profile = user.get_user_profile()
+    profile_image = user_profile.profile_image_url()
+    trips = user.trip_set.all()
+    print "hello"
+    print trips
+    for trip in trips:
+      print trip.name
+    data = {'profile_image': profile_image,
+            'profile': user_profile,
+            'trips': trips}
+
+    return render_to_response('trips.html', data, RequestContext(request))
 
 @login_required(login_url='/accounts/login')
 def update(request):

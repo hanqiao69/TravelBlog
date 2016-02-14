@@ -19,12 +19,18 @@ def format_perc_signed(value):
     return (value)*100
   else:
     return value
+@register.filter(name='thumb')
+def thumb(value):
+    return "images/Thumb"+value
 @register.filter(name='better_worse')
 def better_worse(value):
     if value < 0:
       return "worse"
     else:
       return "better"
+@register.filter
+def modulo(num, val):
+    return num % val
 @register.filter(name='value_percentage')
 def val_perc(value):
     if not value:
