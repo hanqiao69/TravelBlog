@@ -79,7 +79,11 @@ def trip(request, tripid):
     editable = False
     if selected_trip.user == user:
       editable = True
-    data = {'editable': editable, 'trip': selected_trip}
+    posts = selected_trip.posts.all()
+    for post in posts:
+      post.entries = post.entries.all()
+
+    data = {'editable': editable, 'trip': selected_trip, 'posts': posts}
     print data
 
     return render_to_response('trip.html', data, RequestContext(request))
