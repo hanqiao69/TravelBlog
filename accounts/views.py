@@ -149,7 +149,26 @@ def update(request):
 
     return render_to_response('update.html', data, RequestContext(request))
 
+@login_required(login_url='/accounts/login')
+def upload(request, tripid):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            m = Photo.objects.create()
+            m.link = form.cleaned_data['file']
+            m.save()
+            return HttpResponse('image upload success')
+    data = {'tripid': tripid}
+    return render_to_response('upload.html', data, RequestContext(request))
 
+def upload_img(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            m = Photo.objects.create()
+            m.link = form.cleaned_data['file']
+            m.save()
+            return HttpResponse('image upload success')
 def handle_uploaded_file(user, file_):
     user_name = str(user)
     images_dir = 'brandplug/static/user_images/'
@@ -165,7 +184,9 @@ def handle_uploaded_file(user, file_):
         for chunk in file_.chunks():
             destination.write(chunk)
 
-
+class ImageUploadForm(forms.Form):
+    """Image upload form."""
+    image = forms.ImageField()
 @login_required(login_url='/accounts/login')
 def update_image(request):
     if request.method == 'POST':
@@ -173,4 +194,5 @@ def update_image(request):
         if form.is_valid():
             handle_uploaded_file(request.user, request.FILES['image_file'])
     return update(request)
+
 

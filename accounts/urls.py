@@ -12,6 +12,7 @@ urlpatterns = patterns(
     url(r'^profile/me/$', profileself),
     url(r'^profile/update/$', update, name='update'),
     url(r'^profile/trips/$', trips, name='trips'),
+    url(r'^trip/(?P<tripid>[\w.@+-]+)/upload/$', upload, name='trip_upload'),
     url(r'^trip/(?P<tripid>[\w.@+-]+)/$', trip, name='trip'),
     url(r'^profile/update/image$', update_image, name='update_image'),
     url(r'^ajax_calls/search/', autocompleteModel),

@@ -1,0 +1,38 @@
+{%extends 'base.html' %}
+{% load staticfiles %}
+{% load account %}
+{% load cal_extras %}
+{%block content %}
+
+            <p id="locationName"></p>
+            <form action="{% url 'upload_img' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <p><label for="file">Choose a file from your computer:</label></p>
+                <input type="file" id="file" name="file" multiple>
+            </form>
+            <div id="output"></div>
+            <script>
+        var file = document.getElementById('file');
+        file.multiple = true;
+        file.addEventListener('change', function(event) {
+        	ExifLocation.loadFromFileList(event.target.files, function(err, exifLocation) {
+                if (!err) {
+                    var geocoder = new google.maps.Geocoder;
+                    console.log(exifLocation.getLatitude());
+                    console.log(exifLocation.getLongitude());
+                    la = exifLocation.getLatitude();
+                    ln = exifLocation.getLongitude();
+                    getLocationName(geocoder, la, ln);
+                }
+            });
+        }, false);
+        </script>
+        <script>
+        function getLocationName(geocoder, la, ln) {
+        var latlng = {lat: la, lng: ln};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+            console.log(results);
+            document.getElementById("locationName").textContent = results[3].formatted_address;
+        });
+    }
+        </script>
+{%endblock%}

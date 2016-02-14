@@ -3,6 +3,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
+from django import forms
 # from django.contrib.auth.models import User
 # from allauth.account.signals import user_logged_in
 # from django.contrib.auth.signals import user_logged_out
@@ -100,6 +101,7 @@ class Group(models.Model):
         return str(self.id)
 class Photo(models.Model):
     name = models.TextField(null=True, blank=True)
+    link = models.ImageField(upload_to = 'pic_folder/', default = 'pic_folder/None/no-img.jpg')
 class Entry(models.Model):
     user = models.ForeignKey(CustomUser, null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
@@ -114,8 +116,6 @@ class Trip(models.Model):
     name = models.CharField(max_length=500)
     user = models.ForeignKey(CustomUser)
     posts = models.ManyToManyField(Post, null=True, blank=True)
-
-
 # ---SIGNAL-HANDLERS-----------------------------------------------------------
 
 def create_user_profile(sender, instance, created, **kwargs):
