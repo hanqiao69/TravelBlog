@@ -101,12 +101,14 @@ class Group(models.Model):
 class Photo(models.Model):
     name = models.TextField(null=True, blank=True)
 class Entry(models.Model):
+    user = models.ForeignKey(CustomUser, null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     geoname = models.TextField(null=True, blank=True)
     text = models.TextField(null=True, blank=True)
     photos = models.ManyToManyField(Photo, null=True, blank=True)
 class Post(models.Model):
+    user = models.ForeignKey(CustomUser, null=True, blank=True)
     entries = models.ManyToManyField(Entry, null=True, blank=True)
 class Trip(models.Model):
     name = models.CharField(max_length=500)

@@ -73,12 +73,14 @@ def publicprofile(request, username_user):
     return render_to_response('profile.html', data, RequestContext(request))
 
 @login_required(login_url='/accounts/login')
-def trip(request):
+def trip(request, tripid):
+    selected_trip = Trip.objects.get(id=tripid)
     user = CustomUser.objects.get(username=request.user)
-    user_profile = user.get_user_profile()
-
-    data = {'profile_image': user_profile.profile_image_url(),
-            'profile': user_profile}
+    editable = False
+    if selected_trip.user == user:
+      editable = True
+    data = {'editable': editable, 'trip': selected_trip}
+    print data
 
     return render_to_response('trip.html', data, RequestContext(request))
 
