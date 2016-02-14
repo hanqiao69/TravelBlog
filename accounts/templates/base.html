@@ -48,7 +48,6 @@
             <script src="{%static "js/html5shiv.js"%}"></script>
             <script src="{%static "js/respond.min.js"%}"></script>
         <![endif]-->
-        {% block optscript %}{% endblock %}
     </head>
     
     <body>
@@ -60,6 +59,7 @@
                 
                 <div class="navbar-header">
                     <div class="container">
+                        
                         <!--<ul class="info pull-left">
                             <li><a href="#"><i class="icon-mail-1 contact"></i> info@reen.com</a></li>
                             <li><i class="icon-mobile contact"></i> +00 (123) 456 78 90</li>
@@ -88,7 +88,7 @@
                 <div class="yamm">
                     <div class="navbar-collapse collapse">
                         <div class="container">
-
+                            
                             <!-- ============================================================= LOGO ============================================================= -->
                             
                             <a class="navbar-brand" href="/"><h1>TRAVEL BUG</h1></a>
@@ -106,35 +106,39 @@
                                 <li><a href="/ranking">Destination Selector</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle js-activated">Climate</a>
+                                    
                                     <ul class="dropdown-menu">
                                         <li> <a href="/climate/jan">January</a></li>
-                                        <li> <a href="/climate/feb">February</a></li>
-                                        <li><a href="/climate/mar">March</a></li>
-                                        <li><a href="/climate/apr">April</a></li>
-                                        <li> <a href="/climate/may">May</a></li>
-                                        <li> <a href="/climate/jun">June</a></li>
-                                        <li><a href="/climate/jul">July</a></li>
-                                        <li><a href="/climate/aug">August</a></li>
-                                        <li><a href="/climate/sep">September</a></li>
-                                        <li><a href="/climate/oct">October</a></li>
-                                        <li><a href="/climate/nov">November</a></li>
-                                        <li><a href="/climate/dec">December</a></li>
+                                        <li> <a href="/climate/feb">February</a>                            </li>
+                                        <li><a href="/climate/mar">March</a>                            </li>
+                                        <li><a href="/climate/apr">April</a>                            </li>
+                                        <li> <a href="/climate/may">May</a>                            </li>
+                                        <li> <a href="/climate/jun">June</a>                            </li>
+                                        <li><a href="/climate/jul">July</a>                            </li>
+                                        <li><a href="/climate/aug">August</a>                            </li>
+                                        <li><a href="/climate/sep">September</a>                            </li>
+                                        <li><a href="/climate/oct">October</a>                            </li>
+                                        <li><a href="/climate/nov">November</a>                            </li>
+                                        <li><a href="/climate/dec">December</a>                            </li>
                                     </ul><!-- /.dropdown-menu -->
                                 </li><!-- /.dropdown -->
                                 
-
+                
                                 
                                 <li class="searchbox">
-
+                                    
                                     <form id="search" class="navbar-form search" style="margin-top:4px;" role="search" method="POST" action="{% url 'search' %}">
-                                        {% csrf_token %}
-                                        <div style="width:250px">
-                                            <input type="text" class="form-control" id="txtSearch" name="txtSearch">
-                                        </div>
-                                        <button type="submit" class="btn btn-default btn-submit"><i class="icon-search"></i></button>
-                                    </form>
-
+                                            {% csrf_token %}
+                                            <div style="width:250px">
+                                                <input type="text" class="form-control" id="txtSearch" name="txtSearch">
+                                            </div>
+                                            <button type="submit" class="btn btn-default btn-submit"><i class="icon-search"></i></button>
+                                        </form>
+                                              
                                 </li><!-- /.searchbox -->
+
+
+
                                 
                             </ul><!-- /.nav -->
                             
@@ -154,12 +158,12 @@
         <main>
 
             <!-- ============================================================= SECTION – PORTFOLIO POST ============================================================= -->
-            <p id="locationName"></p>
+            <!--<p id="locationName"></p>
             <form>
                 <p><label for="file">Choose a file from your computer:</label></p>
                 <input type="file" id="file" name="file" multiple>
             </form>
-            <div id="output"></div>
+            <div id="output"></div>-->
             <section id="portfolio-post">
                 <div class="container inner-top-md">
 
